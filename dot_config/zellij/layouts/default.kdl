@@ -1,0 +1,14 @@
+layout {
+    tab split_direction="vertical" {
+        pane size="18%" {
+            plugin location="zellij:strider"
+        }
+        pane {
+            pane
+            pane size="30%" split_direction="vertical" {
+                pane
+                pane
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+layout {
+    tab split_direction="vertical" {
+        pane size="30%" {
+            pane
+            pane
+        }
+        pane
+    } 
+}
