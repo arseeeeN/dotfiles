@@ -1,15 +1,21 @@
 #!/bin/sh
 
-pacman -S --needed git base-devel
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
+# Install yay if it doesn't exist
+if ! command -v yay &> /dev/null
+then
+    pacman -S --needed git base-devel
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+fi
 
+# Install all headless packages
 yay -Syu ly
 yay -Syu nushell
 yay -Syu neovim
 yay -Syu zellij
 
+# If not a headless install then also install all GUI related stuff
 {{ $headless := eq (env "CHEZMOI_HEADLESS") "true" }}
 {{ if not $headless }}
 yay -Syu sway
