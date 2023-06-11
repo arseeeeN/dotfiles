@@ -1,0 +1,11 @@
+#!/bin/sh
+
+yay -Syu ly
+yay -Syu nushell
+yay -Syu neovim
+yay -Syu zellij
+
+{{ if eq (env "CHEZMOI_HEADLESS") "true" }}
+yay -Syu sway
+yay -Syu alacritty
+{{ end }}
