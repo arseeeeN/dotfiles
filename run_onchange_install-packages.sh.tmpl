@@ -10,7 +10,8 @@ yay -Syu nushell
 yay -Syu neovim
 yay -Syu zellij
 
-{{ if eq (env "CHEZMOI_HEADLESS") "true" }}
+{{ $headless := eq (env "CHEZMOI_HEADLESS") "true" }}
+{{ if not $headless }}
 yay -Syu sway
 yay -Syu alacritty
 {{ end }}
