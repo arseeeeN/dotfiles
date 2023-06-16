@@ -11,6 +11,10 @@ then
     rm -rf ./yay
 fi
 
+# Install all core packages
+yay -Syu --needed \
+    blight
+
 # Install all headless packages
 yay -Syu --needed \
     ly \
