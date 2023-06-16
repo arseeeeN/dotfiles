@@ -11,13 +11,8 @@ then
     rm -rf ./yay
 fi
 
-# Install all core packages
-yay -Syu --needed \
-    blight
-
 # Install all headless packages
 yay -Syu --needed \
-    ly \
     nushell \
     neovim \
     zellij
@@ -26,6 +21,8 @@ yay -Syu --needed \
 {{ $headless := eq (env "CHEZMOI_HEADLESS") "true" }}
 {{ if not $headless }}
 yay -Syu --needed \
+    ly \
+    blight \
     sway \
     alacritty
 {{ end }}
