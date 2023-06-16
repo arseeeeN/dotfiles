@@ -58,6 +58,8 @@ output * bg #262626 solid_color
     input type:keyboard {
         xkb_layout ch
         xkb_variant de
+        repeat_rate 45
+        repeat_delay 500
     }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -75,6 +77,15 @@ output * bg #262626 solid_color
 
     # Start your launcher
     bindsym $mod+d exec $menu
+
+    # Multimedia keys
+    ## XXX: This will have to be adapted when I switch to PipeWire
+    bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
+    bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
+    bindsym XF86AudioMute exec amixer -D pulse sset Master toggle-mute
+
+    bindsym XF86MonBrightnessUp exec blight set +5%
+    bindsym XF86MonBrightnessDown exec blight set -5%
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -216,8 +227,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-
+    status_command while sh ~/.config/sway/scripts/sway_bar.sh; do sleep 1; done
     colors {
         statusline #f2f4f8
         background #161616
