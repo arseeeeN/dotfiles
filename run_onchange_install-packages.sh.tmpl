@@ -15,7 +15,8 @@ fi
 yay -Syu --needed \
     nushell \
     neovim \
-    zellij
+    zellij \
+    fzf
 
 # If not a headless install then also install all GUI related stuff
 {{ $headless := eq (env "CHEZMOI_HEADLESS") "true" }}
