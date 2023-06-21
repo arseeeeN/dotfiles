@@ -22,6 +22,8 @@ yay -Syu --needed \
 {{ $headless := eq (env "CHEZMOI_HEADLESS") "true" }}
 {{ if not $headless }}
 yay -Syu --needed \
+    ffmpeg \
+    mpv \
     ly \
     blight \
     sway \
