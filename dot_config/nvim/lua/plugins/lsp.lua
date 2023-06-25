@@ -7,13 +7,20 @@ return { -- LSP - Quickstart configs for Nvim LSP
         dependencies = { -- Mason
             -- Portable package manager for Neovim that runs everywhere Neovim runs.
             -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
-            { "williamboman/mason.nvim" }, { "williamboman/mason-lspconfig.nvim" }, -- Autocomplete
+            { "williamboman/mason.nvim" },
+            { "williamboman/mason-lspconfig.nvim" }, -- Autocomplete
             -- A completion plugin for neovim coded in Lua.
             {
                 "hrsh7th/nvim-cmp",
-                dependencies = { "L3MON4D3/LuaSnip", "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-path", "hrsh7th/cmp-buffer",
-                    "saadparwaiz1/cmp_luasnip" }
-            } },
+                dependencies = {
+                    "L3MON4D3/LuaSnip",
+                    "hrsh7th/cmp-nvim-lsp",
+                    "hrsh7th/cmp-path",
+                    "hrsh7th/cmp-buffer",
+                    "saadparwaiz1/cmp_luasnip",
+                },
+            },
+        },
         opts = {
             -- Automatically format on save
             autoformat = true,
@@ -22,7 +29,7 @@ return { -- LSP - Quickstart configs for Nvim LSP
             -- but can be also overridden when specified
             format = {
                 formatting_options = nil,
-                timeout_ms = nil
+                timeout_ms = nil,
             },
             -- LSP Server Settings
             ---@type lspconfig.options
@@ -34,7 +41,8 @@ return { -- LSP - Quickstart configs for Nvim LSP
                 pyright = {},
                 vimls = {},
                 yamlls = {},
-                rust_analyzer = {}
+                jdtls = {},
+                rust_analyzer = {},
             },
             -- you can do any additional lsp server setup here
             -- return true if you don"t want this server to be setup with lspconfig
@@ -47,16 +55,17 @@ return { -- LSP - Quickstart configs for Nvim LSP
                 -- end,
                 -- Specify * to use this function as a fallback for any server
                 -- ["*"] = function(server, opts) end,
-            }
+            },
         },
         ---@param opts Opts
         config = function(_, opts)
             local servers = opts.servers
-            local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+            local capabilities =
+                require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
             local function setup(server)
                 local server_opts = vim.tbl_deep_extend("force", {
-                    capabilities = vim.deepcopy(capabilities)
+                    capabilities = vim.deepcopy(capabilities),
                 }, servers[server] or {})
 
                 if opts.setup[server] then
@@ -98,29 +107,29 @@ return { -- LSP - Quickstart configs for Nvim LSP
             require("mason").setup()
             require("mason-lspconfig").setup({
                 ensure_installed = ensure_installed,
-                automatic_installation = true
+                automatic_installation = true,
             })
             require("mason-lspconfig").setup_handlers({ setup })
 
             -- luasnip setup
-            local luasnip = require "luasnip"
+            local luasnip = require("luasnip")
 
             -- nvim-cmp setup
-            local cmp = require "cmp"
-            cmp.setup {
+            local cmp = require("cmp")
+            cmp.setup({
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body)
-                    end
+                    end,
                 },
                 mapping = cmp.mapping.preset.insert({
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<CR>"] = cmp.mapping.confirm {
+                    ["<CR>"] = cmp.mapping.confirm({
                         behavior = cmp.ConfirmBehavior.Replace,
-                        select = true
-                    },
+                        select = true,
+                    }),
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
@@ -138,30 +147,35 @@ return { -- LSP - Quickstart configs for Nvim LSP
                         else
                             fallback()
                         end
-                    end, { "i", "s" })
+                    end, { "i", "s" }),
                 }),
-                sources = { {
-                    name = "nvim_lsp"
-                }, {
-                    name = "luasnip"
-                }, {
-                    name = "path"
-                }, {
-                    name = "buffer",
-                    option = {
-                        -- Avoid accidentally running on big files
-                        get_bufnrs = function()
-                            local buf = vim.api.nvim_get_current_buf()
-                            local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
-                            if byte_size > 1024 * 1024 then -- 1 Megabyte max
-                                return {}
-                            end
-                            return { buf }
-                        end
-                    }
-                } }
-            }
-        end
+                sources = {
+                    {
+                        name = "nvim_lsp",
+                    },
+                    {
+                        name = "luasnip",
+                    },
+                    {
+                        name = "path",
+                    },
+                    {
+                        name = "buffer",
+                        option = {
+                            -- Avoid accidentally running on big files
+                            get_bufnrs = function()
+                                local buf = vim.api.nvim_get_current_buf()
+                                local byte_size = vim.api.nvim_buf_get_offset(buf, vim.api.nvim_buf_line_count(buf))
+                                if byte_size > 1024 * 1024 then -- 1 Megabyte max
+                                    return {}
+                                end
+                                return { buf }
+                            end,
+                        },
+                    },
+                },
+            })
+        end,
     }, -- Use Neovim as a language server to inject LSP diagnostics,
     -- code actions, and more via Lua.
     {
@@ -177,12 +191,19 @@ return { -- LSP - Quickstart configs for Nvim LSP
 
             null_ls.setup({
                 debug = false,
-                sources = { formatting.prettier.with {
-                    extra_filetypes = { "toml" },
-                    extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" }
-                }, formatting.black.with {
-                    extra_args = { "--fast" }
-                }, formatting.stylua, formatting.google_java_format, diagnostics.flake8 }
+                sources = {
+                    formatting.prettier.with({
+                        extra_filetypes = { "toml" },
+                        extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+                    }),
+                    formatting.black.with({
+                        extra_args = { "--fast" },
+                    }),
+                    formatting.stylua,
+                    formatting.google_java_format,
+                    diagnostics.flake8,
+                },
             })
-        end
-    } }
+        end,
+    },
+}
