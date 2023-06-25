@@ -29,11 +29,15 @@ yay -Syu --needed \
 {{ $headless := eq (env "CHEZMOI_HEADLESS") "true" }}
 {{ if not $headless }}
 yay -Syu --needed \
+    wireplumber \
     ffmpeg \
     mpv \
     ly \
     blight \
     sway \
     swaybg \
+    grim \
+    slurp \
+    mako \
     alacritty
 {{ end }}
