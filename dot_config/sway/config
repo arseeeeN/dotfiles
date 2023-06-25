@@ -21,6 +21,9 @@ set $term alacritty
 set $menu "alacritty -T Run --class run_menu --command alnurun"
 for_window [app_id="run_menu"] floating enable
 
+# Start up some stuff
+exec mako
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
