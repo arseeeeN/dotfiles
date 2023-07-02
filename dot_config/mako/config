@@ -1,0 +1,18 @@
+background-color=#262626
+border-color=#393939
+border-size=1
+padding=10,14
+font=JetBrainsMono Nerd Font 10
+progress-color=#78a9ff
+
+[urgency=low]
+border-color=#525252
+progress-color=#525252
+
+[urgency=normal]
+border-color=#FFAB91
+progress-color=#FFAB91
+
+[urgency=high]
+border-color=#ee5396
+progress-color=#ee5396
