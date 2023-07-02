@@ -86,6 +86,7 @@ output * bg #161616 solid_color
     bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
     bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
     bindsym XF86AudioMute exec amixer -D pulse sset Master toggle-mute
+    bindsym XF86AudioMicMute exec amixer -D pulse sset Capture toggle-mute
 
     bindsym XF86MonBrightnessUp exec blight set +5%
     bindsym XF86MonBrightnessDown exec blight set -5%
