@@ -27,7 +27,7 @@ exec mako
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-output * bg #262626 solid_color
+output * bg #161616 solid_color
 #
 # Example configuration:
 #
@@ -83,13 +83,17 @@ output * bg #262626 solid_color
     bindsym $mod+d exec $menu
 
     # Multimedia keys
-    ## XXX: This will have to be adapted when I switch to PipeWire
     bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
     bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
     bindsym XF86AudioMute exec amixer -D pulse sset Master toggle-mute
 
     bindsym XF86MonBrightnessUp exec blight set +5%
     bindsym XF86MonBrightnessDown exec blight set -5%
+
+    # Screenshot and color picker
+    bindsym $mod+Shift+c exec grim -g $(slurp -p) -t ppm - \
+        | convert - -format '%[pixel:p{0,0}]' txt:- - \
+        | notify-send "Color Picker" $in)
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -99,7 +103,7 @@ output * bg #262626 solid_color
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Shift+r reload
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -216,10 +220,13 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-client.focused #393939 #161616 #f2f4f8 #525252 #262626
-client.focused_inactive #262626 #161616 #525252
-client.unfocused #262626 #161616 #525252
-font JetBrainsMono Nerd Font 8
+client.focused #262626 #161616 #f2f4f8 #525252 #262626
+client.focused_inactive #161616 #161616 #525252
+client.unfocused #161616 #161616 #525252
+font JetBrainsMono Nerd Font 0
+default_border pixel 0
+titlebar_border_thickness 1
+titlebar_padding 1
 
 #
 # Status Bar:
@@ -227,7 +234,8 @@ font JetBrainsMono Nerd Font 8
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-    font JetBrainsMono Nerd Font 8
+    font JetBrainsMono Nerd Font 10
+    height 22
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
@@ -236,8 +244,8 @@ bar {
         statusline #f2f4f8
         background #161616
         focused_workspace #78a9ff #78a9ff #161616
-        active_workspace #393939 #161616 #f2f4f8
-        inactive_workspace #262626 #161616 #dde1e6
+        active_workspace #262626 #262626 #f2f4f8
+        inactive_workspace #161616 #161616 #dde1e6
     }
 }
 
