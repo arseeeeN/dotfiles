@@ -41,18 +41,24 @@ return { -- LSP - Quickstart configs for Nvim LSP
                 pyright = {},
                 vimls = {},
                 yamlls = {},
-                jdtls = {},
-                rust_analyzer = {},
+                tsserver = {},
+                --jdtls = {},
             },
             -- you can do any additional lsp server setup here
             -- return true if you don"t want this server to be setup with lspconfig
             ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
             setup = {
                 -- example to setup with typescript.nvim
-                -- tsserver = function(_, opts)
-                --   require("typescript").setup({ server = opts })
-                --   return true
-                -- end,
+                tsserver = function(_, opts)
+                    require("typescript").setup({ server = opts })
+                    return true
+                end,
+                --jdtls = function(_, opts)
+                --    require("jdtls").start_or_attach({
+                --        cmd = { "/sbin/jdtls" },
+                --        root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+                --    })
+                --end,
                 -- Specify * to use this function as a fallback for any server
                 -- ["*"] = function(server, opts) end,
             },
@@ -206,4 +212,21 @@ return { -- LSP - Quickstart configs for Nvim LSP
             })
         end,
     },
+    { "jose-elias-alvarez/typescript.nvim" },
+    {
+        "simrat39/rust-tools.nvim",
+        config = function()
+            require("rust-tools").setup({
+                server = {
+                    on_attach = function(_, bufnr)
+                        -- Hover actions
+                        vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+                        -- Code action groups
+                        vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+                    end,
+                },
+            })
+        end,
+    },
+    { "mfussenegger/nvim-jdtls" },
 }
