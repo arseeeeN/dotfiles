@@ -22,6 +22,7 @@ source ~/.local/share/chezmoi/generate_env_vars.sh
 # TODO: Add java, jdk-openjdk, maven etc. here
 # TODO: Add rust-analyze/rustup
 yay -Syu --needed \
+    git \
     nushell \
     neovim \
     typescript-language-server \
@@ -29,9 +30,14 @@ yay -Syu --needed \
     zellij \
     bat \
     fzf \
+    jq \
     imagemagick \
-    k9s \
-    jq
+    docker \
+    docker-compose \
+    docker-buildx \
+    kubectl \
+    kubie \
+    k9s
 
 # If not a headless install then also install all GUI related stuff
 {{ $headless := eq (env "CHEZMOI_HEADLESS") "true" }}
