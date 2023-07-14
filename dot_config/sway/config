@@ -92,9 +92,10 @@ output * bg #161616 solid_color
     bindsym XF86MonBrightnessDown exec blight set -5%
 
     # Screenshot and color picker
-    bindsym $mod+Shift+c exec grim -g $(slurp -p) -t ppm - \
-        | convert - -format '%[pixel:p{0,0}]' txt:- - \
-        | notify-send "Color Picker" $in)
+    # TODO: Add different keybinding to add to clipboard vs save it in /Pictures?
+    bindsym $mod+Shift+s exec grim -g "$(slurp)"
+    # TODO: Rewrite into a nushell script and make it copy the hex value into your clipboard
+    bindsym $mod+Shift+c exec notify-send "Color Picker" "$(echo "$(grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:-)" | sed 1d)"
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
