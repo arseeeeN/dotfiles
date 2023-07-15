@@ -1,5 +1,3 @@
--- Close all windows and exit from Neovim with <leader> and q
-vim.keymap.set("n", "<leader>q", ":qa!<CR>", {})
 -- Fast saving with <leader> and s
 vim.keymap.set("n", "<leader>s", ":w<CR>", {})
 -- Move around splits
@@ -7,6 +5,12 @@ vim.keymap.set("n", "<leader>wh", "<C-w>h", {})
 vim.keymap.set("n", "<leader>wj", "<C-w>j", {})
 vim.keymap.set("n", "<leader>wk", "<C-w>k", {})
 vim.keymap.set("n", "<leader>wl", "<C-w>l", {})
+
+-- Diagnostics
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 -- Move between buffers
 vim.keymap.set("n", "<Tab>", ":bnext<CR>")
