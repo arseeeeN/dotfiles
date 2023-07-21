@@ -1,0 +1,95 @@
+#!/bin/nu
+def "main" [] {
+}
+
+def "main run" [config: string = "default"] {
+    deploy $config
+    run
+}
+
+def "main debug" [config: string = "default"] {
+    deploy $config
+    debug
+}
+
+def "main deploy" [config: string = "default"] {
+    deploy $config
+}
+
+def run [] {
+    check_env
+    let catalina_sh = ($env.CATALINA_HOME | path join "bin" "catalina.sh")
+    sh -c $"($catalina_sh) run"
+}
+
+def debug [] {
+    check_env
+    let catalina_sh = ($env.CATALINA_HOME | path join "bin" "catalina.sh")
+    sh -c $"($catalina_sh) debug"
+}
+
+def deploy [config: string] {
+    check_env
+    let config_folder = ($env.HOME | path join ".config" "tomcatctl")
+    # TODO: Add some logic that checks if the config string is default. If it is,
+    # and the file doesn't exist then use the fallback. If any other value is given
+    # force the user to supply a valid config name where the file exists.
+    let config_file = ($config_folder | path join $"($config).toml")
+    let config_data = if ($config_file | path exists) {
+        open $config_file
+    } else {
+        { path: "/dev" }
+    }
+    let filename = (
+        $config_data.path
+        | str trim -c "/"
+        | str replace "/" "#"
+    )
+    let path = (
+        $config_data.path
+        | str trim -c "/"
+        | "/" + $in
+    )
+    let project_base = if "project_path_absolute" in $config_data {
+        $config_data.project_path_absolute
+    } else if "project_path_relative" in $config_folder {
+        pwd | to text | str trim | path join $config_data.project_path_relative
+    } else {
+        pwd | to text | str trim
+    }
+    let artifact_path = ($project_base | path join "target" "*.war")
+    let docBase = (
+        glob $artifact_path
+        | if ($in | is-empty) {
+            print -e $"Failed to match the path: \"($artifact_path)\""
+            exit 1
+        } else { $in }
+        | first
+        | path parse
+        | $"($in.parent)/($in.stem)"
+    )
+    let context_xml = ({
+        tag: "Context"
+        attributes: {
+            path: $path
+            docBase: $docBase
+        }
+    } | to xml)
+    let deploy_folder = ($env.CATALINA_HOME | path join "conf" "Catalina" "localhost")
+    if ($deploy_folder | path exists) {
+        let context_file_path = ($deploy_folder | path join $"($filename).xml")
+        $context_xml | save -f $context_file_path
+        print "Config content:" ($context_xml) "Config path:" $context_file_path
+    } else {
+        print -e $"Can't find Catalina config folder at path: \"($deploy_folder)\""
+    }
+}
+
+def check_env [] {
+    if ("CATALINA_HOME" not-in $env
+    or ($env.CATALINA_HOME | is-empty)
+    or (not ($env.CATALINA_HOME | path exists))) {
+        print -e "Environment variable CATALINA_HOME needs to be set and exist"
+        exit 1
+    }
+}
