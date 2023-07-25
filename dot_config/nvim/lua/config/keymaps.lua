@@ -22,10 +22,27 @@ vim.keymap.set("n", "<leader>r", ":so %<CR>", {})
 -- Telescope
 -- <leader> is a space now
 local builtin = require("telescope.builtin")
+local extensions = require("telescope").extensions
 vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+vim.keymap.set("n", "<leader>ffh", function()
+	builtin.find_files({ hidden = true, no_ignore = true, no_ignore_parent = true })
+end, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 
-vim.keymap.set("n", "<leader>fe", ":Telescope file_browser<CR>", {})
-vim.keymap.set("n", "<leader>feb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", {})
+vim.keymap.set("n", "<leader>fe", extensions.file_browser.file_browser, {})
+vim.keymap.set("n", "<leader>feh", function()
+	extensions.file_browser.file_browser({ hidden = true, respect_gitignore = false })
+end, {})
+vim.keymap.set("n", "<leader>feb", function()
+	extensions.file_browser.file_browser({ path = "%:p:h", select_buffer = "true" })
+end, {})
+vim.keymap.set("n", "<leader>febh", function()
+	extensions.file_browser.file_browser({
+		hidden = true,
+		respect_gitignore = false,
+		path = "%:p:h",
+		select_buffer = "true",
+	})
+end, {})
