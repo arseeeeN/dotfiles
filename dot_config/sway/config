@@ -24,6 +24,8 @@ for_window [app_id="run_menu"] floating enable
 # Start up some stuff
 exec mako
 
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
