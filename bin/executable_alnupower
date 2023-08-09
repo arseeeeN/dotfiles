@@ -1,0 +1,23 @@
+#!/bin/nu
+
+let options = {
+    shutdown: { systemctl poweroff }
+    reboot: { systemctl reboot }
+    hibernate: { systemctl hibernate }
+    suspend: { systemctl suspend }
+    logout: { loginctl terminate-session $env.XDG_SESSION_ID }
+    lockscreen: { loginctl lock-session $env.XDG_SESSION_ID }
+}
+
+let choice = (
+    $options
+    | columns
+    | str join "\n"
+    | fzf --info=hidden
+)
+
+if not ($choice | is-empty) {
+    $options
+    | get $choice
+    | do $in
+}

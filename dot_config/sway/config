@@ -18,8 +18,16 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu "alacritty -T Run --class run_menu --command alnurun"
+set $run_menu "alacritty -T Run --class run_menu --command alnurun"
 for_window [app_id="run_menu"] floating enable
+
+set $power_menu "alacritty -T Power --class power_menu --command alnupower"
+for_window [app_id="power_menu"] {
+    floating enable
+    resize set 130 170
+    move position 0 0
+}
+# for_window [app_id="power_menu"] floating enable
 
 # Start up some stuff
 exec mako
@@ -82,7 +90,7 @@ output * bg #161616 solid_color
     bindsym $mod+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+d exec $run_menu
 
     # Multimedia keys
     bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
@@ -110,7 +118,7 @@ output * bg #161616 solid_color
     bindsym $mod+Shift+r reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec $power_menu
 #
 # Moving around:
 #

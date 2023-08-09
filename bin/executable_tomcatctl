@@ -16,25 +16,58 @@ def "main deploy" [config: string = "default"] {
     deploy $config
 }
 
+def "main config add" [
+    name: string
+    path: string
+    --project_path_relative (-r): string
+    --project_path_absolute (-a): string
+] {
+    let config_folder = $env.HOME | path join ".config" "tomcatctl"
+    if not ($config_folder | path exists) {
+        mkdir $config_folder
+    }
+    mut config = { path: $path }
+    if $project_path_relative != null {
+        $config.project_path_relative = $project_path_relative
+    }
+    if $project_path_absolute != null {
+        $config.project_path_absolute = $project_path_absolute
+    }
+    $config | to toml | save ($config_folder | path join $"($name).toml")
+}
+
+def "main config rm" [name: string] {
+    let config_folder = $env.HOME | path join ".config" "tomcatctl"
+    rm ($config_folder | path join $"($name).toml")
+}
+
+def "main config list" [] {
+    ls ($env.HOME | path join ".config" "tomcatctl")
+    | where type == file
+    | get name
+    # TODO: Make this prettier so that the files get read and the path etc. get printed too
+    | each {|| path parse | get stem }
+}
+
 def run [] {
     check_env
-    let catalina_sh = ($env.CATALINA_HOME | path join "bin" "catalina.sh")
+    let catalina_sh = $env.CATALINA_HOME | path join "bin" "catalina.sh"
     sh -c $"($catalina_sh) run"
 }
 
 def debug [] {
     check_env
-    let catalina_sh = ($env.CATALINA_HOME | path join "bin" "catalina.sh")
+    let catalina_sh = $env.CATALINA_HOME | path join "bin" "catalina.sh"
     sh -c $"($catalina_sh) debug"
 }
 
 def deploy [config: string] {
     check_env
-    let config_folder = ($env.HOME | path join ".config" "tomcatctl")
+    let config_folder = $env.HOME | path join ".config" "tomcatctl"
     # TODO: Add some logic that checks if the config string is default. If it is,
     # and the file doesn't exist then use the fallback. If any other value is given
     # force the user to supply a valid config name where the file exists.
-    let config_file = ($config_folder | path join $"($config).toml")
+    let config_file = $config_folder | path join $"($config).toml"
     let config_data = if ($config_file | path exists) {
         open $config_file
     } else {
@@ -52,13 +85,17 @@ def deploy [config: string] {
     )
     let project_base = if "project_path_absolute" in $config_data {
         $config_data.project_path_absolute
-    } else if "project_path_relative" in $config_folder {
-        pwd | to text | str trim | path join $config_data.project_path_relative
+    } else if "project_path_relative" in $config_data {
+        let project_path_relative = $config_data.project_path_relative
+        | str trim -l -c "."
+        | str trim -c "/"
+        pwd | to text | str trim | path join $project_path_relative
     } else {
         pwd | to text | str trim
     }
     let artifact_path = ($project_base | path join "target" "*.war")
     let docBase = (
+        # TODO: Seems like glob doesn't work on absolute paths after all, use globpath and fix this.
         glob $artifact_path
         | if ($in | is-empty) {
             print -e $"Failed to match the path: \"($artifact_path)\""
