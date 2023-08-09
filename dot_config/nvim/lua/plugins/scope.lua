@@ -1,3 +1,3 @@
 return {
-    "tiagovla/scope.nvim"
+	"tiagovla/scope.nvim",
 }
