@@ -33,6 +33,7 @@ return { -- Treesitter interface
 				"python",
 				"dockerfile",
 				"json",
+				"http",
 				"yaml",
 				"markdown",
 				"html",

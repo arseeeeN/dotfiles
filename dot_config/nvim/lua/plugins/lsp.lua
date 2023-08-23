@@ -4,7 +4,9 @@ return { -- LSP - Quickstart configs for Nvim LSP
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         lazy = true,
-        dependencies = { -- Mason
+        dependencies = {
+            { "folke/neodev.nvim" },
+            -- Mason
             -- Portable package manager for Neovim that runs everywhere Neovim runs.
             -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
             { "williamboman/mason.nvim" },
@@ -42,6 +44,22 @@ return { -- LSP - Quickstart configs for Nvim LSP
                 vimls = {},
                 yamlls = {},
                 tsserver = {},
+                lua_ls = {
+                    settings = {
+                        Lua = {
+                            workspace = {
+                                checkThirdParty = false,
+                                library = {
+                                    vim.fn.expand("$VIMRUNTIME"),
+                                    "${3rd}/busted/library",
+                                    "${3rd}/luassert/library",
+                                },
+                                maxPreload = 5000,
+                                preloadFileSize = 10000,
+                            },
+                        },
+                    },
+                },
                 svelte = {},
                 tailwindcss = {},
             },
@@ -53,6 +71,11 @@ return { -- LSP - Quickstart configs for Nvim LSP
                 tsserver = function(_, opts)
                     require("typescript").setup({ server = opts })
                     return true
+                end,
+                lua_ls = function(_, opts)
+                    local library = opts.settings.Lua.workspace.library
+                    table.insert(library, require("neodev.config").types())
+                    return false
                 end,
                 --jdtls = function(_, opts)
                 --    require("jdtls").start_or_attach({
@@ -85,14 +108,6 @@ return { -- LSP - Quickstart configs for Nvim LSP
                     end
                 end
                 require("lspconfig")[server].setup(server_opts)
-            end
-
-            -- temp fix for lspconfig rename
-            -- https://github.com/neovim/nvim-lspconfig/pull/2439
-            local mappings = require("mason-lspconfig.mappings.server")
-            if not mappings.lspconfig_to_package.lua_ls then
-                mappings.lspconfig_to_package.lua_ls = "lua-language-server"
-                mappings.package_to_lspconfig["lua-language-server"] = "lua_ls"
             end
 
             local mlsp = require("mason-lspconfig")

@@ -2,20 +2,27 @@
 def "main" [] {
 }
 
-def "main run" [config: string = "default"] {
+# Deploy the war file with the given config and start Catalina in the current window
+def "main run" [
+    config: string = "default" # Profile for the tomcat deployment
+    --jdpa # Start Catalina under JDPA debugger
+] {
     deploy $config
     run
 }
 
+# Deploy the war file with the given config and start Catalina in a debugger
 def "main debug" [config: string = "default"] {
     deploy $config
     debug
 }
 
+# Deploy the war file to tomcat with the given config
 def "main deploy" [config: string = "default"] {
     deploy $config
 }
 
+# Create a deployment config and add it to your config folder
 def "main config add" [
     name: string
     path: string
@@ -36,11 +43,13 @@ def "main config add" [
     $config | to toml | save ($config_folder | path join $"($name).toml")
 }
 
+# Remove a config file from your config folder
 def "main config rm" [name: string] {
     let config_folder = $env.HOME | path join ".config" "tomcatctl"
     rm ($config_folder | path join $"($name).toml")
 }
 
+# List all configs in your config folder
 def "main config list" [] {
     ls ($env.HOME | path join ".config" "tomcatctl")
     | where type == file
@@ -53,6 +62,12 @@ def run [] {
     check_env
     let catalina_sh = $env.CATALINA_HOME | path join "bin" "catalina.sh"
     sh -c $"($catalina_sh) run"
+}
+
+def jpda [] {
+    check_env
+    let catalina_sh = $env.CATALINA_HOME | path join "bin" "catalina.sh"
+    sh -c $"($catalina_sh) jpda start"
 }
 
 def debug [] {
