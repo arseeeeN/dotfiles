@@ -96,6 +96,7 @@ if not (which catalina.sh | is-empty) {
         | path parse | get parent
     )
 }
+# TODO: Somehow conditionally source/use the vars.nu file here when present
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 $env.PATH = (
