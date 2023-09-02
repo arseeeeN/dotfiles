@@ -1,10 +1,18 @@
 #!/bin/nu
+def remove_exec_keycode [command: string] -> string {
+    if ($command | str trim | str ends-with "%u") {
+        $command | str trim | str substring ..-2
+    } else {
+        $command
+    }
+}
+
 ls -f /usr/share/applications/*.desktop
     | $in.name
     | each {|x| open $x | from ini | get "Desktop Entry"}
     | compact Exec Terminal
     | where Type == "Application" and Terminal == "false"
-    | each {|x| $x.Name + "  \"" + $x.Exec + "\"\n"}
+    | each {|x| $x.Name + "  \"" + (remove_exec_keycode $x.Exec) + "\"\n"}
     | str join
     | fzf -d "  " --with-nth 1
     | split row "  "

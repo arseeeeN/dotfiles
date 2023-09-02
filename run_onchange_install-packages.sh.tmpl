@@ -19,14 +19,10 @@ source ~/.local/share/chezmoi/generate_env_vars.sh
 #       and add them all to chezmoi.
 
 # Install all headless packages
-# TODO: Add java, jdk-openjdk, maven etc. here
-# TODO: Add rust-analyze/rustup
 yay -Syu --needed \
     git \
     nushell \
     neovim \
-    typescript-language-server \
-    jdtls \
     zellij \
     bat \
     fd \
@@ -40,7 +36,6 @@ yay -Syu --needed \
     kubectl \
     kubie \
     k9s \
-    go \
     gomplate-bin
 
 # If not a headless install then also install all GUI related stuff
