@@ -1,23 +1,25 @@
-vars_file_path = ~/.config/nushell/vars.nu
+vars_file_path=~/.config/nushell/vars.nu
 
-printf "-- Installation Options" >&2
-printf "Do you want to install all desktop related packages? (window manager, GUI programms, etc.)" >&2
-printf "If you choose no then a headless install will be performed." >&2
+printf "\055\055 Installation Options\n" >&2
+printf "Do you want to install all desktop related packages? (window manager, GUI programms, etc.)\n" >&2
+printf "If you choose no then a headless install will be performed.\n" >&2
 printf "[y/n]: " >&2
 read -r headless </dev/tty
+
+set_env(){
+    printf "Setting $1=$2\n"
+    echo "\$env.$1 = $2" >> $vars_file_path
+    export $1=$2
+}
 
 while true; do
     case $headless in
         [Yy]*)
-            printf "Setting CHEZMOI_HEADLESS=\"false\""
-            export CHEZMOI_HEADLESS="false"
-            echo "CHEZMOI_HEADLESS=\"false\"" >> $vars_file_path
+            set_env CHEZMOI_HEADLESS false
             break
             ;;
         [Nn]*)
-            printf "Setting CHEZMOI_HEADLESS=\"true\""
-            export CHEZMOI_HEADLESS="true"
-            echo "CHEZMOI_HEADLESS=\"true\"" >> $vars_file_path
+            set_env CHEZMOI_HEADLESS true
             break
             ;;
         *)

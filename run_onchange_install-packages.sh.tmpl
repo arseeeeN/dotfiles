@@ -11,12 +11,10 @@ then
     rm -rf ./yay
 fi
 
-# Check if the vars.nu file exists
-# If it doesn't exist this is probably a first Install
-# The user will be prompted to configure a few settings
-source ~/.local/share/chezmoi/generate_env_vars.sh
-# TODO: Actually load the vars.nu file in the env.nu file
-#       and add them all to chezmoi.
+vars_file_path=~/.config/nushell/vars.nu
+if [[ ! -f "$vars_file_path" ]]; then
+    source ~/.local/share/chezmoi/generate_env_vars.sh
+fi
 
 # Install all headless packages
 yay -Syu --needed \

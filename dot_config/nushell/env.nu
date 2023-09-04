@@ -96,7 +96,14 @@ if not (which catalina.sh | is-empty) {
         | path parse | get parent
     )
 }
-# TODO: Somehow conditionally source/use the vars.nu file here when present
+
+# TODO: I hope nushell changes the way const stuff works,
+#       having these paths everywhere is quite ugly.
+#       Why isn't $nu.default-config-dir const??
+const vars_nu_path = "~/.config/nushell/vars.nu"
+if ($vars_nu_path | path exists) {
+    source $vars_nu_path
+}
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 $env.PATH = (
