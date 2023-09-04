@@ -1,9 +1,9 @@
 vars_file_path=~/.config/nushell/vars.nu
 
-printf "\055\055 Installation Options\n" >&2
-printf "Do you want to install all desktop related packages? (window manager, GUI programms, etc.)\n" >&2
-printf "If you choose no then a headless install will be performed.\n" >&2
-printf "[y/n]: " >&2
+printf "\055\055 Installation Options\n"
+printf "Do you want to install all desktop related packages? (window manager, GUI programms, etc.)\n"
+printf "If you choose no then a headless install will be performed.\n"
+printf "[y/n]: "
 read -r headless </dev/tty
 
 set_env(){
