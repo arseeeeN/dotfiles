@@ -8,12 +8,12 @@ The look is minimal and unobtrusive, using the [oxocarbon](https://github.com/ny
 
 A short overview of what I think are the most important parts of the setup and my daily workflow:
 
-- _Distribution_: [Arch Linux](https://archlinux.org/)
-- _Window Manager_: [Sway](https://github.com/swaywm/sway)
-- _Shell_: [Nushell](https://github.com/nushell/nushell)
-- _Editor_: [Neovim](https://github.com/neovim/neovim)
-- _Terminal Multiplexer_: [Zellij](https://github.com/zellij-org/zellij)
-- _Version Manager_: [rtx](https://github.com/jdx/rtx)
+- **Distribution**: [Arch Linux](https://archlinux.org/)
+- **Window Manager**: [Sway](https://github.com/swaywm/sway)
+- **Shell**: [Nushell](https://github.com/nushell/nushell)
+- **Editor**: [Neovim](https://github.com/neovim/neovim)
+- **Terminal Multiplexer**: [Zellij](https://github.com/zellij-org/zellij)
+- **Version Manager**: [rtx](https://github.com/jdx/rtx)
 
 # How to use
 
