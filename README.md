@@ -35,8 +35,8 @@ The second step, which is mostly done automatically, is to install and configure
 
 There are a couple ways to add additional LSPs and DAPs to the config:
 
-- Add them to the install list and let [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) do the configuration work for you. You can also override those defaults in the configuration object of the install list.
-- Do the step above but also use a dedicated plugin for the LSP/DAP to get its full feature set (e.g. [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) or [rust-tools](https://github.com/simrat39/rust-tools.nvim)). You often times need to add a custom hook for these things, so that nvim-lspconfig knows that something else is taking care of the LSP or DAP startup.
+- Add them to the server list (`opts.servers` in `plugins/lsp/init.lua`) and let [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) do the configuration work for you. You can also override those defaults in the configuration object of the server list.
+- Do the step above but also use a dedicated plugin for the LSP/DAP to get its full feature set (e.g. [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) or [rust-tools](https://github.com/simrat39/rust-tools.nvim)). You often times need to add a custom setup hook for these things (`opts.setup` in `plugins/lsp/init.lua`), so that nvim-lspconfig knows that something else is taking care of the LSP or DAP startup.
 
 Generally speaking the LSPs ecosystem is a lot looser and needs more work to get functioning. DAPs are mostly quite straightforward (albeit not yet that mature in Neovim), because of VSCode standardizing the way they are used.
 
