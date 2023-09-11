@@ -21,7 +21,7 @@ Because I tried to keep everything as simple as possible, most of my setup shoul
 
 ## Keybindigns
 
-A lot of the keybindings are left default on purpose with a few exceptions that can all be observed in their respective configuration files. For basic usage, the Sway config files is a good starting place.
+A lot of the keybindings are left default on purpose with a few exceptions that can all be observed in their respective configuration files. For basic usage, the Sway config file is a good starting place.
 
 ## Editor
 
@@ -35,13 +35,13 @@ The second step, which is mostly done automatically, is to install and configure
 
 There are a couple ways to add additional LSPs and DAPs to the config:
 
-- Add them to use install list and let [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) do the configuration work for you. You can also override those defaults in the configuration object of the install list.
+- Add them to the install list and let [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) do the configuration work for you. You can also override those defaults in the configuration object of the install list.
 - Do the step above but also use a dedicated plugin for the LSP/DAP to get its full feature set (e.g. [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) or [rust-tools](https://github.com/simrat39/rust-tools.nvim)). You often times need to add a custom hook for these things, so that nvim-lspconfig knows that something else is taking care of the LSP or DAP startup.
 
-Generally speaking the LSPs ecosystem is a lot looser and needs more works to get functioning. DAPs are mostly quite straightforward (albeit not yet that mature in Neovim), because of VSCode pioneering and standardizing the way they are used.
+Generally speaking the LSPs ecosystem is a lot looser and needs more work to get functioning. DAPs are mostly quite straightforward (albeit not yet that mature in Neovim), because of VSCode standardizing the way they are used.
 
 ## Other stuff
 
 Nushell is great, sometimes a bit buggy as it's still quite new but I take that any day of the week over writing bash scripts. For instructions on how to use it, their [website](https://www.nushell.sh/) has decent documentation.
 
-The tool is use the most outside of all the things mentioned above is `z` or [zoxide](https://github.com/ajeetdsouza/zoxide). If you are still using `cd` to navigate through your whole file system then ~I am very sorry for you~ I advise you to check out zoxide or similar directory navigators (e.g. [autojump](https://github.com/wting/autojump), [bashmarks](https://github.com/huyng/bashmarks)).
+The tool I use the most outside of all the things mentioned above is `z` or [zoxide](https://github.com/ajeetdsouza/zoxide). If you are still using `cd` to navigate through your whole file system then ~I am very sorry for you~ I advise you to check out zoxide or similar directory navigators (e.g. [autojump](https://github.com/wting/autojump), [bashmarks](https://github.com/huyng/bashmarks)).
