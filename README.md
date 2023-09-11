@@ -19,7 +19,7 @@ A short overview of what I think are the most important parts of the setup and m
 
 Because I tried to keep everything as simple as possible, most of my setup should be usable right away if you know how to use the tools listed above.
 
-## Keybindigns
+## Keybindings
 
 A lot of the keybindings are left default on purpose with a few exceptions that can all be observed in their respective configuration files. For basic usage, the Sway config file is a good starting place.
 
