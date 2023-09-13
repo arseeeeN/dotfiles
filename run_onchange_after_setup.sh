@@ -18,11 +18,14 @@ main() {
         setup_env_headless
     fi
 
-    # Update packages and install nushell
-    yay -Syu --needed nushell
+    # If nushell doesn't exists, install it
+    if ! command -v nu &> /dev/null
+    then
+        yay -Syu nushell
+    fi
 
     # Install all other packags
-    nu ./install_packages.nu
+    nu --config ~/.config/nushell/config.nu --env-config ~/.config/nushell/env.nu ./install_packages.nu
 }
 
 # TODO: Potentially move the env var creation to a nushell script and only do the bare minimum setup in bash

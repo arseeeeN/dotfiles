@@ -1,5 +1,5 @@
 # Install all headless packages
-(yay -S --needed
+(yay -Syu --needed
     git
     nushell
     neovim
@@ -20,7 +20,7 @@
 
 # If not a headless install then also install all GUI related stuff
 if not $env.CHEZMOI_HEADLESS {
-    (yay -S --needed
+    (yay -Syu --needed
         wev
         wireplumber
         ffmpeg
