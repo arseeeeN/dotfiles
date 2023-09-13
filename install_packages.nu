@@ -4,6 +4,8 @@
     nushell
     neovim
     zellij
+    zoxide
+    rtx
     bat
     fd
     fzf
