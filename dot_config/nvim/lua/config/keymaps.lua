@@ -19,7 +19,8 @@ mk.nmap("<Tab>", ":bnext<CR>", "Switch to next buffer")
 mk.nmap("<S-Tab>", ":bprev<CR>", "Switch to previous buffer")
 
 -- Miscellaneous
-mk.nmap("<leader>cs", ":set spell!<CR>", "Toggle spell checking")
+mk.nmap("<leader>ts", ":set spell!<CR>", "Toggle spell checking")
+mk.nmap("<leader>th", ":set hlsearch!<CR>", "Toggle search highlighting")
 
 -- Zen Mode
 mk.nmap("<leader>zm", ":ZenMode<CR>", "Activate Zen Mode")
