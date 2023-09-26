@@ -47,95 +47,101 @@ register /usr/bin/nu_plugin_formats  {
       "description": "Convert eml structured data into record",
       "result": {
         "Record": {
-          "cols": [
-            "Subject",
-            "From",
-            "To",
-            "Body"
-          ],
-          "vals": [
-            {
-              "String": {
-                "val": "Welcome",
-                "span": {
-                  "start": 0,
-                  "end": 0
-                }
-              }
-            },
-            {
-              "Record": {
-                "cols": [
-                  "Name",
-                  "Address"
-                ],
-                "vals": [
-                  {
-                    "Nothing": {
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
-                  },
-                  {
-                    "String": {
-                      "val": "test@email.com",
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
+          "val": {
+            "cols": [
+              "Subject",
+              "From",
+              "To",
+              "Body"
+            ],
+            "vals": [
+              {
+                "String": {
+                  "val": "Welcome",
+                  "internal_span": {
+                    "start": 0,
+                    "end": 0
                   }
-                ],
-                "span": {
-                  "start": 0,
-                  "end": 0
                 }
-              }
-            },
-            {
-              "Record": {
-                "cols": [
-                  "Name",
-                  "Address"
-                ],
-                "vals": [
-                  {
-                    "Nothing": {
-                      "span": {
-                        "start": 0,
-                        "end": 0
+              },
+              {
+                "Record": {
+                  "val": {
+                    "cols": [
+                      "Name",
+                      "Address"
+                    ],
+                    "vals": [
+                      {
+                        "Nothing": {
+                          "internal_span": {
+                            "start": 0,
+                            "end": 0
+                          }
+                        }
+                      },
+                      {
+                        "String": {
+                          "val": "test@email.com",
+                          "internal_span": {
+                            "start": 0,
+                            "end": 0
+                          }
+                        }
                       }
-                    }
+                    ]
                   },
-                  {
-                    "String": {
-                      "val": "someone@somewhere.com",
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
+                  "internal_span": {
+                    "start": 0,
+                    "end": 0
                   }
-                ],
-                "span": {
-                  "start": 0,
-                  "end": 0
+                }
+              },
+              {
+                "Record": {
+                  "val": {
+                    "cols": [
+                      "Name",
+                      "Address"
+                    ],
+                    "vals": [
+                      {
+                        "Nothing": {
+                          "internal_span": {
+                            "start": 0,
+                            "end": 0
+                          }
+                        }
+                      },
+                      {
+                        "String": {
+                          "val": "someone@somewhere.com",
+                          "internal_span": {
+                            "start": 0,
+                            "end": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "internal_span": {
+                    "start": 0,
+                    "end": 0
+                  }
+                }
+              },
+              {
+                "String": {
+                  "val": "Test",
+                  "internal_span": {
+                    "start": 0,
+                    "end": 0
+                  }
                 }
               }
-            },
-            {
-              "String": {
-                "val": "Test",
-                "span": {
-                  "start": 0,
-                  "end": 0
-                }
-              }
-            }
-          ],
-          "span": {
+            ]
+          },
+          "internal_span": {
             "start": 0,
             "end": 0
           }
@@ -147,95 +153,101 @@ register /usr/bin/nu_plugin_formats  {
       "description": "Convert eml structured data into record",
       "result": {
         "Record": {
-          "cols": [
-            "Subject",
-            "From",
-            "To",
-            "Body"
-          ],
-          "vals": [
-            {
-              "String": {
-                "val": "Welcome",
-                "span": {
-                  "start": 0,
-                  "end": 0
-                }
-              }
-            },
-            {
-              "Record": {
-                "cols": [
-                  "Name",
-                  "Address"
-                ],
-                "vals": [
-                  {
-                    "Nothing": {
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
-                  },
-                  {
-                    "String": {
-                      "val": "test@email.com",
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
+          "val": {
+            "cols": [
+              "Subject",
+              "From",
+              "To",
+              "Body"
+            ],
+            "vals": [
+              {
+                "String": {
+                  "val": "Welcome",
+                  "internal_span": {
+                    "start": 0,
+                    "end": 0
                   }
-                ],
-                "span": {
-                  "start": 0,
-                  "end": 0
                 }
-              }
-            },
-            {
-              "Record": {
-                "cols": [
-                  "Name",
-                  "Address"
-                ],
-                "vals": [
-                  {
-                    "Nothing": {
-                      "span": {
-                        "start": 0,
-                        "end": 0
+              },
+              {
+                "Record": {
+                  "val": {
+                    "cols": [
+                      "Name",
+                      "Address"
+                    ],
+                    "vals": [
+                      {
+                        "Nothing": {
+                          "internal_span": {
+                            "start": 0,
+                            "end": 0
+                          }
+                        }
+                      },
+                      {
+                        "String": {
+                          "val": "test@email.com",
+                          "internal_span": {
+                            "start": 0,
+                            "end": 0
+                          }
+                        }
                       }
-                    }
+                    ]
                   },
-                  {
-                    "String": {
-                      "val": "someone@somewhere.com",
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
+                  "internal_span": {
+                    "start": 0,
+                    "end": 0
                   }
-                ],
-                "span": {
-                  "start": 0,
-                  "end": 0
+                }
+              },
+              {
+                "Record": {
+                  "val": {
+                    "cols": [
+                      "Name",
+                      "Address"
+                    ],
+                    "vals": [
+                      {
+                        "Nothing": {
+                          "internal_span": {
+                            "start": 0,
+                            "end": 0
+                          }
+                        }
+                      },
+                      {
+                        "String": {
+                          "val": "someone@somewhere.com",
+                          "internal_span": {
+                            "start": 0,
+                            "end": 0
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "internal_span": {
+                    "start": 0,
+                    "end": 0
+                  }
+                }
+              },
+              {
+                "String": {
+                  "val": "T",
+                  "internal_span": {
+                    "start": 0,
+                    "end": 0
+                  }
                 }
               }
-            },
-            {
-              "String": {
-                "val": "T",
-                "span": {
-                  "start": 0,
-                  "end": 0
-                }
-              }
-            }
-          ],
-          "span": {
+            ]
+          },
+          "internal_span": {
             "start": 0,
             "end": 0
           }
@@ -288,88 +300,90 @@ register /usr/bin/nu_plugin_formats  {
           "vals": [
             {
               "Record": {
-                "cols": [
-                  "properties",
-                  "events",
-                  "alarms",
-                  "to-Dos",
-                  "journals",
-                  "free-busys",
-                  "timezones"
-                ],
-                "vals": [
-                  {
-                    "List": {
-                      "vals": [],
-                      "span": {
-                        "start": 0,
-                        "end": 0
+                "val": {
+                  "cols": [
+                    "properties",
+                    "events",
+                    "alarms",
+                    "to-Dos",
+                    "journals",
+                    "free-busys",
+                    "timezones"
+                  ],
+                  "vals": [
+                    {
+                      "List": {
+                        "vals": [],
+                        "internal_span": {
+                          "start": 0,
+                          "end": 0
+                        }
+                      }
+                    },
+                    {
+                      "List": {
+                        "vals": [],
+                        "internal_span": {
+                          "start": 0,
+                          "end": 0
+                        }
+                      }
+                    },
+                    {
+                      "List": {
+                        "vals": [],
+                        "internal_span": {
+                          "start": 0,
+                          "end": 0
+                        }
+                      }
+                    },
+                    {
+                      "List": {
+                        "vals": [],
+                        "internal_span": {
+                          "start": 0,
+                          "end": 0
+                        }
+                      }
+                    },
+                    {
+                      "List": {
+                        "vals": [],
+                        "internal_span": {
+                          "start": 0,
+                          "end": 0
+                        }
+                      }
+                    },
+                    {
+                      "List": {
+                        "vals": [],
+                        "internal_span": {
+                          "start": 0,
+                          "end": 0
+                        }
+                      }
+                    },
+                    {
+                      "List": {
+                        "vals": [],
+                        "internal_span": {
+                          "start": 0,
+                          "end": 0
+                        }
                       }
                     }
-                  },
-                  {
-                    "List": {
-                      "vals": [],
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
-                  },
-                  {
-                    "List": {
-                      "vals": [],
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
-                  },
-                  {
-                    "List": {
-                      "vals": [],
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
-                  },
-                  {
-                    "List": {
-                      "vals": [],
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
-                  },
-                  {
-                    "List": {
-                      "vals": [],
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
-                  },
-                  {
-                    "List": {
-                      "vals": [],
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
-                  }
-                ],
-                "span": {
+                  ]
+                },
+                "internal_span": {
                   "start": 0,
                   "end": 0
                 }
               }
             }
           ],
-          "span": {
+          "internal_span": {
             "start": 0,
             "end": 0
           }
@@ -419,44 +433,48 @@ register /usr/bin/nu_plugin_formats  {
       "description": "Converts ini formatted string to record",
       "result": {
         "Record": {
-          "cols": [
-            "foo"
-          ],
-          "vals": [
-            {
-              "Record": {
-                "cols": [
-                  "a",
-                  "b"
-                ],
-                "vals": [
-                  {
-                    "String": {
-                      "val": "1",
-                      "span": {
-                        "start": 0,
-                        "end": 0
+          "val": {
+            "cols": [
+              "foo"
+            ],
+            "vals": [
+              {
+                "Record": {
+                  "val": {
+                    "cols": [
+                      "a",
+                      "b"
+                    ],
+                    "vals": [
+                      {
+                        "String": {
+                          "val": "1",
+                          "internal_span": {
+                            "start": 0,
+                            "end": 0
+                          }
+                        }
+                      },
+                      {
+                        "String": {
+                          "val": "2",
+                          "internal_span": {
+                            "start": 0,
+                            "end": 0
+                          }
+                        }
                       }
-                    }
+                    ]
                   },
-                  {
-                    "String": {
-                      "val": "2",
-                      "span": {
-                        "start": 0,
-                        "end": 0
-                      }
-                    }
+                  "internal_span": {
+                    "start": 0,
+                    "end": 0
                   }
-                ],
-                "span": {
-                  "start": 0,
-                  "end": 0
                 }
               }
-            }
-          ],
-          "span": {
+            ]
+          },
+          "internal_span": {
             "start": 0,
             "end": 0
           }
@@ -509,152 +527,160 @@ register /usr/bin/nu_plugin_formats  {
           "vals": [
             {
               "Record": {
-                "cols": [
-                  "properties"
-                ],
-                "vals": [
-                  {
-                    "List": {
-                      "vals": [
-                        {
-                          "Record": {
-                            "cols": [
-                              "name",
-                              "value",
-                              "params"
-                            ],
-                            "vals": [
-                              {
-                                "String": {
-                                  "val": "N",
-                                  "span": {
-                                    "start": 0,
-                                    "end": 0
+                "val": {
+                  "cols": [
+                    "properties"
+                  ],
+                  "vals": [
+                    {
+                      "List": {
+                        "vals": [
+                          {
+                            "Record": {
+                              "val": {
+                                "cols": [
+                                  "name",
+                                  "value",
+                                  "params"
+                                ],
+                                "vals": [
+                                  {
+                                    "String": {
+                                      "val": "N",
+                                      "internal_span": {
+                                        "start": 0,
+                                        "end": 0
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "String": {
+                                      "val": "Foo",
+                                      "internal_span": {
+                                        "start": 0,
+                                        "end": 0
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "Nothing": {
+                                      "internal_span": {
+                                        "start": 0,
+                                        "end": 0
+                                      }
+                                    }
                                   }
-                                }
+                                ]
                               },
-                              {
-                                "String": {
-                                  "val": "Foo",
-                                  "span": {
-                                    "start": 0,
-                                    "end": 0
-                                  }
-                                }
-                              },
-                              {
-                                "Nothing": {
-                                  "span": {
-                                    "start": 0,
-                                    "end": 0
-                                  }
-                                }
+                              "internal_span": {
+                                "start": 0,
+                                "end": 0
                               }
-                            ],
-                            "span": {
-                              "start": 0,
-                              "end": 0
+                            }
+                          },
+                          {
+                            "Record": {
+                              "val": {
+                                "cols": [
+                                  "name",
+                                  "value",
+                                  "params"
+                                ],
+                                "vals": [
+                                  {
+                                    "String": {
+                                      "val": "FN",
+                                      "internal_span": {
+                                        "start": 0,
+                                        "end": 0
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "String": {
+                                      "val": "Bar",
+                                      "internal_span": {
+                                        "start": 0,
+                                        "end": 0
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "Nothing": {
+                                      "internal_span": {
+                                        "start": 0,
+                                        "end": 0
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              "internal_span": {
+                                "start": 0,
+                                "end": 0
+                              }
+                            }
+                          },
+                          {
+                            "Record": {
+                              "val": {
+                                "cols": [
+                                  "name",
+                                  "value",
+                                  "params"
+                                ],
+                                "vals": [
+                                  {
+                                    "String": {
+                                      "val": "EMAIL",
+                                      "internal_span": {
+                                        "start": 0,
+                                        "end": 0
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "String": {
+                                      "val": "foo@bar.com",
+                                      "internal_span": {
+                                        "start": 0,
+                                        "end": 0
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "Nothing": {
+                                      "internal_span": {
+                                        "start": 0,
+                                        "end": 0
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              "internal_span": {
+                                "start": 0,
+                                "end": 0
+                              }
                             }
                           }
-                        },
-                        {
-                          "Record": {
-                            "cols": [
-                              "name",
-                              "value",
-                              "params"
-                            ],
-                            "vals": [
-                              {
-                                "String": {
-                                  "val": "FN",
-                                  "span": {
-                                    "start": 0,
-                                    "end": 0
-                                  }
-                                }
-                              },
-                              {
-                                "String": {
-                                  "val": "Bar",
-                                  "span": {
-                                    "start": 0,
-                                    "end": 0
-                                  }
-                                }
-                              },
-                              {
-                                "Nothing": {
-                                  "span": {
-                                    "start": 0,
-                                    "end": 0
-                                  }
-                                }
-                              }
-                            ],
-                            "span": {
-                              "start": 0,
-                              "end": 0
-                            }
-                          }
-                        },
-                        {
-                          "Record": {
-                            "cols": [
-                              "name",
-                              "value",
-                              "params"
-                            ],
-                            "vals": [
-                              {
-                                "String": {
-                                  "val": "EMAIL",
-                                  "span": {
-                                    "start": 0,
-                                    "end": 0
-                                  }
-                                }
-                              },
-                              {
-                                "String": {
-                                  "val": "foo@bar.com",
-                                  "span": {
-                                    "start": 0,
-                                    "end": 0
-                                  }
-                                }
-                              },
-                              {
-                                "Nothing": {
-                                  "span": {
-                                    "start": 0,
-                                    "end": 0
-                                  }
-                                }
-                              }
-                            ],
-                            "span": {
-                              "start": 0,
-                              "end": 0
-                            }
-                          }
+                        ],
+                        "internal_span": {
+                          "start": 0,
+                          "end": 0
                         }
-                      ],
-                      "span": {
-                        "start": 0,
-                        "end": 0
                       }
                     }
-                  }
-                ],
-                "span": {
+                  ]
+                },
+                "internal_span": {
                   "start": 0,
                   "end": 0
                 }
               }
             }
           ],
-          "span": {
+          "internal_span": {
             "start": 0,
             "end": 0
           }

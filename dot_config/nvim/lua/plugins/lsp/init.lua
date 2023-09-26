@@ -206,7 +206,12 @@ return {
 				sources = {
 					formatting.prettier.with({
 						extra_filetypes = { "toml" },
-						extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+						extra_args = {
+							"--tab-width",
+							"4",
+							"--indent_size",
+							"4",
+						},
 					}),
 					formatting.black.with({
 						extra_args = { "--fast" },
