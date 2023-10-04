@@ -63,4 +63,8 @@ set_env() {
     export $1=$2
 }
 
+{{ if eq .chezmoi.os "linux" -}}
 main "$@"
+{{ else if eq .chezmoi.os "darwin" -}}
+# Placeholder
+{{ end -}}
