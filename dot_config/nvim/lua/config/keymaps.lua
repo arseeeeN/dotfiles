@@ -1,7 +1,13 @@
 local mk = require("utils.mapkeys")
--- Fast saving with <leader> and s
+
+-- Buffers
 mk.nmap("<leader>s", ":w<CR>", "Save the buffer in the currently focused window")
--- Switch between windows
+-- TODO: Investigate if :bw or :bd is better. Are global marks, or marks in general any useful? Can't I just use Harpoon?
+mk.nmap("<leader>q", ":bw<CR>", "Close the buffer in the currently focused window")
+mk.nmap("<Tab>", ":bnext<CR>", "Switch to next buffer")
+mk.nmap("<S-Tab>", ":bprev<CR>", "Switch to previous buffer")
+
+-- Windows
 mk.nmap("<leader>wh", "<C-w>h", "Move focus to the window on the left")
 mk.nmap("<leader>wj", "<C-w>j", "Move focus to the window below")
 mk.nmap("<leader>wk", "<C-w>k", "Move focus to the window above")
@@ -14,16 +20,18 @@ mk.nmap("[d", vim.diagnostic.goto_prev, "Go to the previous diagnostic")
 mk.nmap("]d", vim.diagnostic.goto_next, "Go to the next diagnostic")
 mk.nmap("<leader>dl", vim.diagnostic.setloclist, "Add diagnostic to location list")
 
--- Move between buffers
-mk.nmap("<Tab>", ":bnext<CR>", "Switch to next buffer")
-mk.nmap("<S-Tab>", ":bprev<CR>", "Switch to previous buffer")
-
 -- Miscellaneous
 mk.nmap("<leader>ts", ":set spell!<CR>", "Toggle spell checking")
 mk.nmap("<leader>th", ":set hlsearch!<CR>", "Toggle search highlighting")
 
 -- Zen Mode
 mk.nmap("<leader>zm", ":ZenMode<CR>", "Activate Zen Mode")
+
+-- DAP
+-- TODO: Add more keybindings once the debugging actually works the way I want it to work
+mk.nmap("<leader>Db", ":DapToggleBreakpoint", "Toggle a breakpoint on the current line")
+mk.nmap("<leader>Dc", ":DapContinue", "Continue the current debugging session or start a new one")
+mk.nmap("<leader>Dt", ":DapTerminate", "Terminate the current debugging session")
 
 -- Telescope
 local builtin = require("telescope.builtin")

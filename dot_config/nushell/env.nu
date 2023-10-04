@@ -88,6 +88,8 @@ $env.EDITOR = "nvim"
 $env.SHELL = "nu"
 
 $env.MOZ_ENABLE_WAYLAND = 1
+$env.AWT_TOOLKIT = "MToolkit"
+$env._JAVA_AWT_WM_NONREPARENTING = 1
 $env.XDG_CURRENT_DESKTOP = "sway"
 if not (which catalina.sh | is-empty) {
     $env.CATALINA_HOME = (which catalina.sh

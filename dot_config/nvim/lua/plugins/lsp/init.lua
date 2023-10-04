@@ -205,6 +205,7 @@ return {
 				debug = false,
 				sources = {
 					formatting.prettier.with({
+						disabled_filetypes = { "yaml" },
 						extra_filetypes = { "toml" },
 						extra_args = {
 							"--tab-width",
