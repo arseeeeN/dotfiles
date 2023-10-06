@@ -1,4 +1,8 @@
+{{ if eq .chezmoi.os "linux" -}}
 #!/bin/nu --config ~/.config/nushell/config.nu --env-config ~/.config/nushell/env.nu
+{{ else if eq .chezmoi.os "darwin" -}}
+#!/opt/homebrew/bin/nu --config ~/.config/nushell/config.nu --env-config ~/.config/nushell/env.nu
+{{ end -}}
 # TODO: Remove the config flags in the shebang as
 #       soon as nushell fixes the default configs
 

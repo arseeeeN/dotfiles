@@ -805,3 +805,4 @@ use completions/docker.nu *
 # XXX: Temporary until zoxide makes its file a module instead of a script
 source integrations/zoxide.nu
 source integrations/rtx.nu
+use integrations/conda.nu

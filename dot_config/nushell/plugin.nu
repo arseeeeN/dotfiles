@@ -1,4 +1,4 @@
-register /usr/bin/nu_plugin_formats  {
+register /Users/arseen/.cargo/bin/nu_plugin_formats  {
   "sig": {
     "name": "from eml",
     "usage": "Parse text as .eml and create record.",
@@ -257,7 +257,7 @@ register /usr/bin/nu_plugin_formats  {
   ]
 }
 
-register /usr/bin/nu_plugin_formats  {
+register /Users/arseen/.cargo/bin/nu_plugin_formats  {
   "sig": {
     "name": "from ics",
     "usage": "Parse text as .ics and create table.",
@@ -393,7 +393,7 @@ register /usr/bin/nu_plugin_formats  {
   ]
 }
 
-register /usr/bin/nu_plugin_formats  {
+register /Users/arseen/.cargo/bin/nu_plugin_formats  {
   "sig": {
     "name": "from ini",
     "usage": "Parse text as .ini and create table.",
@@ -484,7 +484,7 @@ register /usr/bin/nu_plugin_formats  {
   ]
 }
 
-register /usr/bin/nu_plugin_formats  {
+register /Users/arseen/.cargo/bin/nu_plugin_formats  {
   "sig": {
     "name": "from vcf",
     "usage": "Parse text as .vcf and create table.",
