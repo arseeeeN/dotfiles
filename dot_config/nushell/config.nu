@@ -801,6 +801,7 @@ use tools *
 # XXX: Find a fix for this so that it can just source the folder
 use completions/git.nu *
 use completions/docker.nu *
+use completions/zellij.nu *
 
 # XXX: Temporary until zoxide makes its file a module instead of a script
 source integrations/zoxide.nu

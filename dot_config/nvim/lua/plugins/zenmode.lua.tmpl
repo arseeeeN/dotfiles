@@ -1,0 +1,25 @@
+return {
+    "folke/zen-mode.nvim",
+    opts = {
+        window = {
+            backdrop = 1,
+            width = 80,
+            options = {
+                signcolumn = "no",
+                number = false,
+                relativenumber = false,
+                cursorline = false,
+            },
+        },
+        plugins = {
+            alacritty = {
+                enabled = true,
+{{- if eq .chezmoi.os "linux" }}
+                font = "14",
+{{- else if eq .chezmoi.os "darwin" }}
+                font = "18",
+{{- end }}
+            },
+        },
+    },
+}
