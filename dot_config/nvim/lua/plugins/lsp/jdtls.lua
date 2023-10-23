@@ -1,3 +1,6 @@
+local JAVA_11 = os.getenv("HOME") .. "/.local/share/rtx/installs/java/11"
+local JAVA_21 = os.getenv("HOME") .. "/.local/share/rtx/installs/java/21"
+
 local get_config_name = function()
     local os_uname = vim.loop.os_uname()
     if os_uname.machine == "arm64" then
@@ -18,6 +21,10 @@ local get_config_name = function()
     -- Have linux as the fallback
     return "config_linux"
 end
+
+-- Set the JAVA_HOME env var for this process so that the lsp starts up correctly.
+-- This needs to be at least Java 17 or higher for jdtls to work.
+vim.fn.setenv("JAVA_HOME", JAVA_21)
 
 return {
     cmd = {
@@ -82,14 +89,15 @@ return {
                 runtimes = {
                     {
                         name = "JavaSE-11",
-                        path = os.getenv("HOME") .. "/.local/share/rtx/installs/java/11",
+                        path = JAVA_11
                         -- path = "/usr/lib/jvm/java-11-openjdk/",
                     },
-                    {
-                        name = "JavaSE-20",
-                        path = os.getenv("HOME") .. "/.local/share/rtx/installs/java/20",
-                        -- path = "/usr/lib/jvm/java-20-openjdk/",
-                    },
+                    -- At the time of writing this comment, jdtls doesn't support Java 20 and 21 yet.
+                    -- {
+                    --     name = "JavaSE-21",
+                    --     path = JAVA_21
+                    --     -- path = "/usr/lib/jvm/java-21-openjdk/",
+                    -- },
                 },
             },
         },

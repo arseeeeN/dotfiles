@@ -799,7 +799,7 @@ $env.config = {
 use tools *
 # use completions *
 # XXX: Find a fix for this so that it can just source the folder
-use completions/git.nu *
+# use completions/git.nu *
 use completions/docker.nu *
 use completions/zellij.nu *
 
@@ -807,3 +807,5 @@ use completions/zellij.nu *
 source integrations/zoxide.nu
 source integrations/rtx.nu
 use integrations/conda.nu
+
+source ~/.cache/carapace/init.nu
