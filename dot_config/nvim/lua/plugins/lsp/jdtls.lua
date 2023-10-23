@@ -22,6 +22,12 @@ local get_config_name = function()
     return "config_linux"
 end
 
+local mason_packages = table.concat({
+    vim.fn.stdpath("data"),
+    "mason",
+    "packages",
+}, "/")
+
 -- Set the JAVA_HOME env var for this process so that the lsp starts up correctly.
 -- This needs to be at least Java 17 or higher for jdtls to work.
 vim.fn.setenv("JAVA_HOME", JAVA_21)
@@ -50,18 +56,14 @@ return {
         -- 	"org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar",
         -- }, "/"),
         table.concat({
-            vim.fn.stdpath("data"),
-            "mason",
-            "packages",
+            mason_packages,
             "jdtls",
             "bin",
             "jdtls",
         }, "/"),
         "-configuration",
         table.concat({
-            vim.fn.stdpath("data"),
-            "mason",
-            "packages",
+            mason_packages,
             "jdtls",
             get_config_name(),
         }, "/"),
@@ -77,6 +79,18 @@ return {
     },
     -- TODO: on_attach set some LSP specific actions like organizing imports etc. see the github page for details
     root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+    init_options = {
+        bundles = {
+            vim.fn.glob(
+                table.concat({
+                    mason_packages,
+                    "java-debug-adapter",
+                    "extension",
+                    "server",
+                    "com.microsoft.java.debug.plugin-*.jar"
+                }, "/"), 1)
+        },
+    },
     settings = {
         java = {
             format = {

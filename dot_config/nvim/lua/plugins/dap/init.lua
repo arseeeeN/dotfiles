@@ -15,6 +15,15 @@ return {
             dap.listeners.before.event_exited["dapui_config"] = function()
                 dapui.close()
             end
+            dap.configurations.java = {
+                {
+                    type = "java",
+                    name = "Attach to Tomcat",
+                    request = "attach",
+                    hostName = "0.0.0.0",
+                    port = "8000",
+                },
+            }
         end,
     },
     {
