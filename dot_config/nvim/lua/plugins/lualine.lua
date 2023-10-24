@@ -4,75 +4,6 @@ return { -- Statusline
         "nvim-lualine/lualine.nvim",
         config = function(_)
             local lualine = require("lualine")
-            local lualine_require = require("lualine_require")
-
-            function loadcolors()
-                local oxocarbon = require("oxocarbon")
-                local colors = {
-                    bg = oxocarbon.base11,
-                    fg = oxocarbon.base14,
-                    yellow = oxocarbon.base13,
-                    cyan = oxocarbon.base09,
-                    black = oxocarbon.base15,
-                    green = oxocarbon.base08,
-                    white = oxocarbon.base05,
-                    magenta = oxocarbon.base03,
-                    blue = oxocarbon.base11,
-                    red = oxocarbon.base14
-                }
-
-                -- Try to load pywal colors
-                local modules = lualine_require.lazy_require {
-                    utils_notices = "lualine.utils.notices"
-                }
-                local sep = package.config:sub(1, 1)
-                local wal_colors_path = table.concat({ os.getenv("HOME"), ".cache", "wal", "colors.sh" }, sep)
-                local wal_colors_file = io.open(wal_colors_path, "r")
-
-                if wal_colors_file == nil then
-                    modules.utils_notices.add_notice("lualine.nvim: " .. wal_colors_path .. " not found")
-                    return colors
-                end
-
-                local ok, wal_colors_text = pcall(wal_colors_file.read, wal_colors_file, "*a")
-                wal_colors_file:close()
-
-                if not ok then
-                    modules.utils_notices.add_notice("lualine.nvim: " .. wal_colors_path .. " could not be read: " ..
-                        wal_colors_text)
-                    return colors
-                end
-
-                local wal = {}
-
-                for line in vim.gsplit(wal_colors_text, "\n") do
-                    if line:match("^[a-z0-9]+='#[a-fA-F0-9]+'$") ~= nil then
-                        local i = line:find("=")
-                        local key = line:sub(0, i - 1)
-                        local value = line:sub(i + 2, #line - 1)
-                        wal[key] = value
-                    end
-                end
-
-                -- Color table for highlights
-                colors = {
-                    bg = wal.background,
-                    fg = wal.foreground,
-                    yellow = wal.color3,
-                    cyan = wal.color4,
-                    black = wal.color0,
-                    green = wal.color2,
-                    white = wal.color7,
-                    magenta = wal.color5,
-                    blue = wal.color6,
-                    red = wal.color1
-                }
-
-                return colors
-            end
-
-            local colors = loadcolors()
-
             local conditions = {
                 buffer_not_empty = function()
                     return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -99,16 +30,10 @@ return { -- Statusline
                         -- right section. Both are highlighted by c theme .  So we
                         -- are just setting default looks o statusline
                         normal = {
-                            c = {
-                                fg = colors.fg,
-                                bg = colors.bg
-                            }
+                            c = {}
                         },
                         inactive = {
-                            c = {
-                                fg = colors.fg,
-                                bg = colors.bg
-                            }
+                            c = {}
                         }
                     }
                 },
@@ -148,41 +73,12 @@ return { -- Statusline
                 function()
                     return ""
                 end,
-                color = function()
-                    -- auto change color according to neovims mode
-                    local mode_color = {
-                        n = colors.red,
-                        i = colors.green,
-                        v = colors.blue,
-                        [""] = colors.blue,
-                        V = colors.blue,
-                        c = colors.magenta,
-                        no = colors.red,
-                        s = colors.yellow,
-                        S = colors.yellow,
-                        [""] = colors.yellow,
-                        ic = colors.yellow,
-                        R = colors.white,
-                        Rv = colors.white,
-                        cv = colors.red,
-                        ce = colors.red,
-                        r = colors.cyan,
-                        rm = colors.cyan,
-                        ["r?"] = colors.cyan,
-                        ["!"] = colors.red,
-                        t = colors.red
-                    }
-                    return {
-                        fg = mode_color[vim.fn.mode()]
-                    }
-                end
             }
 
             ins_left {
                 "filename",
                 cond = conditions.buffer_not_empty,
                 color = {
-                    fg = colors.magenta,
                     gui = "bold"
                 }
             }
@@ -191,7 +87,6 @@ return { -- Statusline
                 "branch",
                 icon = "",
                 color = {
-                    fg = colors.blue,
                     gui = "bold"
                 }
             }
@@ -203,17 +98,6 @@ return { -- Statusline
                     added = " ",
                     modified = " ",
                     removed = " "
-                },
-                diff_color = {
-                    added = {
-                        fg = colors.green
-                    },
-                    modified = {
-                        fg = colors.yellow
-                    },
-                    removed = {
-                        fg = colors.red
-                    }
                 },
                 cond = conditions.hide_in_width
             }
@@ -243,7 +127,6 @@ return { -- Statusline
                 end,
                 icon = " LSP:",
                 color = {
-                    fg = colors.cyan,
                     gui = "bold"
                 }
             }
@@ -256,17 +139,6 @@ return { -- Statusline
                     warn = " ",
                     info = " "
                 },
-                diagnostics_color = {
-                    color_error = {
-                        fg = colors.red
-                    },
-                    color_warn = {
-                        fg = colors.yellow
-                    },
-                    color_info = {
-                        fg = colors.cyan
-                    }
-                },
                 always_visible = true
             }
 
@@ -275,7 +147,6 @@ return { -- Statusline
                 fmt = string.upper,
                 cond = conditions.hide_in_width,
                 color = {
-                    fg = colors.green,
                     gui = "bold"
                 }
             }
@@ -285,7 +156,6 @@ return { -- Statusline
                 fmt = string.upper,
                 icons_enabled = false,
                 color = {
-                    fg = colors.green,
                     gui = "bold"
                 }
             }
@@ -293,7 +163,6 @@ return { -- Statusline
             ins_right {
                 "location",
                 color = {
-                    fg = colors.fg,
                     gui = "bold"
                 }
             }
@@ -301,7 +170,6 @@ return { -- Statusline
             ins_right {
                 "progress",
                 color = {
-                    fg = colors.fg,
                     gui = "bold"
                 }
             }

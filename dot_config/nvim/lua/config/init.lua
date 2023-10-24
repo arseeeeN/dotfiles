@@ -24,8 +24,6 @@ require("lazy").setup({
     install = {
         -- install missing plugins on startup
         missing = true,
-        -- try to load one of these colorschemes when starting an installation during startup
-        colorscheme = { "oxocarbon" }
     },
     checker = {
         -- automatically check for plugin updates
