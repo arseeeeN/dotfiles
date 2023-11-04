@@ -108,5 +108,5 @@ for _, plugin in pairs(disabled_built_ins) do
 end
 
 -- Colorscheme
-opt.background = "dark"
 cmd.colorscheme("oxocarbon")
+opt.background = "dark"
