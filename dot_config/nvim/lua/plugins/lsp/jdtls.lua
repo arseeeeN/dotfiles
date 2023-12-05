@@ -22,11 +22,7 @@ local get_config_name = function()
     return "config_linux"
 end
 
-local mason_packages = table.concat({
-    vim.fn.stdpath("data"),
-    "mason",
-    "packages",
-}, "/")
+local mason_packages = require("utils.mason").mason_packages
 
 -- Set the JAVA_HOME env var for this process so that the lsp starts up correctly.
 -- This needs to be at least Java 17 or higher for jdtls to work.

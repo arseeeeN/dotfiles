@@ -21,7 +21,7 @@ def "parse vars" [] {
   $in | lines | parse "{op},{name},{value}"
 }
 
-def-env rtx [command?: string, --help, ...rest: string] {
+def --env rtx [command?: string, --help, ...rest: string] {
   let commands = ["shell", "deactivate"]
 
   if ($command == null) {
@@ -37,7 +37,7 @@ def-env rtx [command?: string, --help, ...rest: string] {
   }
 }
 
-def-env "update-env" [] {
+def --env "update-env" [] {
   for $var in $in {
     if $var.op == "set" {
       load-env {($var.name): $var.value}
@@ -47,7 +47,7 @@ def-env "update-env" [] {
   }
 }
 
-def-env rtx_hook [] {
+def --env rtx_hook [] {
   ^rtx hook-env -s nu
     | parse vars
     | update-env

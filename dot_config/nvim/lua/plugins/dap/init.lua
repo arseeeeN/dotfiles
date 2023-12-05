@@ -20,10 +20,12 @@ return {
                     type = "java",
                     name = "Attach to Tomcat",
                     request = "attach",
-                    hostName = "0.0.0.0",
+                    hostName = "localhost",
                     port = "8000",
                 },
             }
+            require("plugins.dap.codelldb")
+                .setup_adapters(dap)
         end,
     },
     {
