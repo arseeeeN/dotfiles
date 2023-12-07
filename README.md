@@ -18,6 +18,7 @@ A short overview of what I think are the most important parts of the setup and m
 # How to use
 
 Because I tried to keep everything as simple as possible, most of my setup should be usable right away if you know how to use the tools listed above.
+This repo was created using `chezmoi`, so if you want to copy everything as is then using chezmoi is the easiest way.
 
 ## Keybindings
 
