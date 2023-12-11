@@ -1,0 +1,23 @@
+# Program
+lcmd - e : alacritty
+
+# Keys
+ralt - 2 : skhd -t "@"
+ralt - 3 : skhd -t "#"
+ralt - 7 : skhd -t "|"
+ralt - 0x27 : skhd -t "{"
+ralt - 0x2A : skhd -t "}"
+ralt - 0x21 : skhd -t "["
+ralt - 0x1E : skhd -t "]"
+ralt - 0x18 : skhd -t "~"
+ralt - 0x32 : skhd -t "\\"
+
+# Actions
+ctrl - c : skhd -k "cmd - c" # Copy
+ctrl - v : skhd -k "cmd - v" # Paste
+ctrl - x : skhd -k "cmd - x" # Cut
+ctrl - a : skhd -k "cmd - a" # Search
+ctrl - f : skhd -k "cmd - f" # Find
+ctrl - z : skhd -k "cmd - z" # Undo
+ctrl - y : skhd -k "cmd + shift - z" # Redo
+
