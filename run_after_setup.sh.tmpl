@@ -23,9 +23,12 @@ main() {
     then
         yay -Syu nushell
     fi
-
+    ls
     # Install all other packags
-    nu --config ~/.config/nushell/config.nu --env-config ~/.config/nushell/env.nu ./install_packages.nu
+    nu \
+    --config ~/.config/nushell/config.nu \
+    --env-config ~/.config/nushell/env.nu \
+    ~/.local/share/chezmoi/install_packages.nu
 }
 
 # TODO: Potentially move the env var creation to a nushell script and only do the bare minimum setup in bash
