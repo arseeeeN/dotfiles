@@ -73,7 +73,7 @@ export def --env activate [
 }
 
 # Deactivate currently active conda environment
-export def-env deactivate [] {
+export def --env deactivate [] {
     let path_name = if "PATH" in $env { "PATH" } else { "Path" }
     $env.$path_name = $env.CONDA_OLD_PATH
 
