@@ -1,4 +1,4 @@
-export def-env main [file: path = .env] {
+export def --env main [file: path = .env] {
     open $file
     | lines
     | parse -r '(?P<k>.+?)=(?P<v>.+)'

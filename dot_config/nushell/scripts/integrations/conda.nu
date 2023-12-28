@@ -1,5 +1,5 @@
 # Activate conda environment
-export def-env activate [
+export def --env activate [
     env_name?: string@'nu-complete conda envs' # name of the environment
 ] {
     let conda_info = (conda info --envs --json | from json)
