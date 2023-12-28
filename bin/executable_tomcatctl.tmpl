@@ -15,7 +15,11 @@ def "main run" [
     --jdpa # Start Catalina under JDPA debugger
 ] {
     deploy $config
-    run
+    if $jdpa {
+        jdpa
+    } else {
+        run
+    }
 }
 
 # Deploy the war file with the given config and start Catalina in a debugger
