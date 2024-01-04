@@ -1,43 +1,43 @@
 export-env {
-  $env.RTX_SHELL = "nu"
-  
+  $env.MISE_SHELL = "nu"
+
   $env.config = ($env.config | upsert hooks {
       pre_prompt: ($env.config.hooks.pre_prompt ++
       [{
-      condition: {|| "RTX_SHELL" in $env }
-      code: {|| rtx_hook }
+      condition: {|| "MISE_SHELL" in $env }
+      code: {|| mise_hook }
       }])
       env_change: {
           PWD: ($env.config.hooks.env_change.PWD ++
           [{
-          condition: {|| "RTX_SHELL" in $env }
-          code: {|| rtx_hook }
+          condition: {|| "MISE_SHELL" in $env }
+          code: {|| mise_hook }
           }])
       }
   })
 }
-  
+
 def "parse vars" [] {
   $in | lines | parse "{op},{name},{value}"
 }
-  
-def-env rtx [command?: string, --help, ...rest: string] {
+
+def --env mise [command?: string, --help, ...rest: string] {
   let commands = ["shell", "deactivate"]
-  
+
   if ($command == null) {
-    ^"/opt/homebrew/bin/rtx"
+    ^mise
   } else if ($command == "activate") {
-    let-env RTX_SHELL = "nu"
+    let-env MISE_SHELL = "nu"
   } else if ($command in $commands) {
-    ^"/opt/homebrew/bin/rtx" $command $rest
+    ^mise $command $rest
     | parse vars
     | update-env
   } else {
-    ^"/opt/homebrew/bin/rtx" $command $rest
+    ^mise $command $rest
   }
 }
-  
-def-env "update-env" [] {
+
+def --env "update-env" [] {
   for $var in $in {
     if $var.op == "set" {
       load-env {($var.name): $var.value}
@@ -46,9 +46,9 @@ def-env "update-env" [] {
     }
   }
 }
-  
-def-env rtx_hook [] {
-  ^"/opt/homebrew/bin/rtx" hook-env -s nu
+
+def --env mise_hook [] {
+  ^mise hook-env -s nu
     | parse vars
     | update-env
 }

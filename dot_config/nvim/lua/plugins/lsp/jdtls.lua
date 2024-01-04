@@ -1,5 +1,5 @@
-local JAVA_11 = os.getenv("HOME") .. "/.local/share/rtx/installs/java/11"
-local JAVA_21 = os.getenv("HOME") .. "/.local/share/rtx/installs/java/21"
+local JAVA_11 = os.getenv("HOME") .. "/.local/share/mise/installs/java/11"
+local JAVA_21 = os.getenv("HOME") .. "/.local/share/mise/installs/java/21"
 
 local get_config_name = function()
     local os_uname = vim.loop.os_uname()
@@ -30,7 +30,7 @@ vim.fn.setenv("JAVA_HOME", JAVA_21)
 
 return {
     cmd = {
-        -- os.getenv("HOME") .. "/.local/share/rtx/installs/java/20/bin/java",
+        -- os.getenv("HOME") .. "/.local/share/mise/installs/java/20/bin/java",
         -- "-Declipse.application=org.eclipse.jdt.ls.core.id1",
         -- "-Dosgi.bundles.defaultStartLevel=4",
         -- "-Declipse.product=org.eclipse.jdt.ls.core.product",
