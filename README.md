@@ -13,7 +13,7 @@ A short overview of what I think are the most important parts of the setup and m
 - **Shell**: [Nushell](https://github.com/nushell/nushell)
 - **Editor**: [Neovim](https://github.com/neovim/neovim)
 - **Terminal Multiplexer**: [Zellij](https://github.com/zellij-org/zellij)
-- **Version Manager**: [rtx](https://github.com/jdx/rtx)
+- **Version Manager**: [mise](https://github.com/jdx/mise)
 
 # How to use
 
@@ -28,9 +28,9 @@ A lot of the keybindings are left default on purpose with a few exceptions that 
 
 The most complex program in my setup is probably by far my editor, Neovim. This is because of its high customizability and the fact that it's my main code editor, so it has to have all the necessary features to accomplish that task.
 
-I still tried to keep my Neovim config as lightweight, portable and clean as possible but that requires a few setup steps to get working. The most manual one being the installation of all the runtimes and compilers via `rtx`.
+I still tried to keep my Neovim config as lightweight, portable and clean as possible but that requires a few setup steps to get working. The most manual one being the installation of all the runtimes and compilers via `mise`.
 
-If you do not wish to use `rtx` but want to install everything using your main package manager then you need to change some preconfigured paths in the configuration code. Currently there is no single place where these things are defined as I didn't have the need for it, maybe that will change in the future.
+If you do not wish to use `mise` but want to install everything using your main package manager then you need to change some preconfigured paths in the configuration code. Currently there is no single place where these things are defined as I didn't have the need for it, maybe that will change in the future.
 
 The second step, which is mostly done automatically, is to install and configure the language servers and debuggers for the languages you use. This is done via `:Mason` inside Neovim and the configurations are in the `plugins/lsp/` and the `plugins/dap/` folders. I have the ones I use set up for auto installation and they should work without any additional fuss after you install them via Mason.
 

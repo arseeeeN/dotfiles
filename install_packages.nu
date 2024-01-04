@@ -4,7 +4,7 @@ let headless_packages = [
     "neovim"
     "zellij"
     "zoxide"
-    "rtx"
+    "mise"
     "bat"
     "fd"
     "fzf"
