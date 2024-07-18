@@ -2,7 +2,7 @@ return {
     { "mfussenegger/nvim-dap" },
     {
         "rcarriga/nvim-dap-ui",
-        dependencies = { "mfussenegger/nvim-dap" },
+        dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
         config = function(_)
             local dap, dapui = require("dap"), require("dapui")
             dapui.setup()
@@ -22,6 +22,13 @@ return {
                     request = "attach",
                     hostName = "localhost",
                     port = "8000",
+                },
+                {
+                    type = "java",
+                    name = "Attach to Quarkus",
+                    request = "attach",
+                    hostName = "localhost",
+                    port = "8787",
                 },
             }
             require("plugins.dap.codelldb")

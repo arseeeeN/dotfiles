@@ -44,11 +44,12 @@ return {
                 -- pyright = {},
                 -- vimls = {},
                 jdtls = require("plugins.lsp.jdtls"),
-                yamlls = {},
+                -- yamlls = {},
                 tsserver = {},
                 lua_ls = require("plugins.lsp.lua_ls"),
                 svelte = {},
                 tailwindcss = {},
+                kotlin_language_server = {},
             },
             -- you can do any additional lsp server setup here
             -- return true if you don"t want this server to be setup with lspconfig
@@ -73,6 +74,19 @@ return {
                     })
                     return true
                 end,
+                kotlin_language_server = function(_, opts)
+                    opts.root_dir = require("lspconfig").util.root_pattern('.git')
+                    return false
+                end,
+                -- groovyls = function(_, opts)
+                --     opts.cmd = { table.concat({
+                --         require("utils.mason").mason_packages,
+                --         "groovyls",
+                --         "bin",
+                --         "groovyls",
+                --     }, "/") }
+                --     return false
+                -- end,
                 -- Specify * to use this function as a fallback for any server
                 -- ["*"] = function(server, opts) end,
             },

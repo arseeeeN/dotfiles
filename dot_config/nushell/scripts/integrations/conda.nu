@@ -75,7 +75,7 @@ export def --env activate [
 # Deactivate currently active conda environment
 export def --env deactivate [] {
     let path_name = if "PATH" in $env { "PATH" } else { "Path" }
-    $env.$path_name = $env.CONDA_OLD_PATH
+    load-env { $path_name: $env.CONDA_OLD_PATH }
 
     hide-env CONDA_PROMPT_MODIFIER
     hide-env CONDA_PREFIX
@@ -147,7 +147,7 @@ def conda-create-path-unix [env_dir: path] {
 }
 
 def windows? [] {
-    ((sys).host.name | str downcase) == "windows"
+    ((sys host).name | str downcase) == "windows"
 }
 
 def system-path [] {

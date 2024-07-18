@@ -1,9 +1,20 @@
 return {
-    "rest-nvim/rest.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function(_)
-        local rest = require("rest-nvim")
-        rest.setup()
-        vim.keymap.set("n", "R", rest.run, {})
-    end,
+	-- {
+	--     "vhyrro/luarocks.nvim",
+	--     priority = 1000,
+	--     config = true,
+	--     opts = {
+	--         rocks = { "lua-curl", "nvim-nio", "mimetypes", "xml2lua" }
+	--     }
+	-- },
+	-- {
+	--     "rest-nvim/rest.nvim",
+	--     ft = "http",
+	--     dependencies = { "luarocks.nvim" },
+	--     config = function()
+	--         require("rest-nvim").setup()
+	--         local telescope = require("telescope")
+	--         telescope.load_extension("rest")
+	--     end,
+	-- }
 }

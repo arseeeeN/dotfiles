@@ -46,7 +46,6 @@ return { -- Treesitter interface
                 "svelte",
                 "java",
                 "kdl",
-                "nu",
             },
             highlight = {
                 enable = true,
@@ -71,19 +70,19 @@ return { -- Treesitter interface
                 },
             },
         },
-        ---@param opts TSConfig
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
-            local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-            -- Add custom parsers here
-            parser_config.nu = {
-                install_info = {
-                    url = "https://github.com/nushell/tree-sitter-nu",
-                    files = { "src/parser.c" },
-                    branch = "main",
-                },
-                filetype = "nu",
-            }
-        end,
+        -- ---@param opts TSConfig
+        -- config = function(_, opts)
+        --     require("nvim-treesitter.configs").setup(opts)
+        --     local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+        --     -- Add custom parsers here
+        --     parser_config.nu = {
+        --         install_info = {
+        --             url = "https://github.com/nushell/tree-sitter-nu",
+        --             files = { "src/parser.c" },
+        --             branch = "main",
+        --         },
+        --         filetype = "nu",
+        --     }
+        -- end,
     },
 }

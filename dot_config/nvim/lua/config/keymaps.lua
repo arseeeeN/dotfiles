@@ -2,6 +2,8 @@ local mk = require("utils.mapkeys")
 
 -- Buffers
 mk.nmap("<leader>s", ":w<CR>", "Save the buffer in the currently focused window")
+mk.nmap("<leader>nas", ":noautocmd w<CR>",
+    "Save the buffer in the currently focused window without applying any autocommands")
 -- TODO: Investigate if :bw or :bd is better. Are global marks, or marks in general any useful? Can't I just use Harpoon?
 mk.nmap("<leader>q", ":bw<CR>", "Close the buffer in the currently focused window")
 mk.nmap("<Tab>", ":bnext<CR>", "Switch to next buffer")
@@ -32,6 +34,10 @@ mk.nmap("<leader>zm", ":ZenMode<CR>", "Activate Zen Mode")
 mk.nmap("<leader>Db", ":DapToggleBreakpoint<CR>", "Toggle a breakpoint on the current line")
 mk.nmap("<leader>Dc", ":DapContinue<CR>", "Continue the current debugging session or start a new one")
 mk.nmap("<leader>Dt", ":DapTerminate<CR>", "Terminate the current debugging session")
+
+-- -- rest.nvim
+-- mk.nmap("<leader>rr", ":Rest run<CR>", "Run request under the cursor")
+-- mk.nmap("<leader>rl", ":Rest last<CR>", "Re-run latest request")
 
 -- Telescope
 local builtin = require("telescope.builtin")
@@ -64,3 +70,4 @@ mk.nmap("<leader>hbfe", function()
         select_buffer = "true",
     })
 end, "Open file explorer at buffer file location including hidden and ignored files using Telescope")
+-- mk.nmap("<leader>re", extensions.rest.select_env, "Select environment for rest.nvim requests using Telescope")

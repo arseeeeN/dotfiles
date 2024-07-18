@@ -29,11 +29,11 @@ def --env mise [command?: string, --help, ...rest: string] {
   } else if ($command == "activate") {
     $env.MISE_SHELL = "nu"
   } else if ($command in $commands) {
-    ^mise $command $rest
+    ^mise $command ...$rest
     | parse vars
     | update-env
   } else {
-    ^mise $command $rest
+    ^mise $command ...$rest
   }
 }
 
