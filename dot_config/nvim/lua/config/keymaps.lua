@@ -30,14 +30,28 @@ mk.nmap("<leader>th", ":set hlsearch!<CR>", "Toggle search highlighting")
 mk.nmap("<leader>zm", ":ZenMode<CR>", "Activate Zen Mode")
 
 -- DAP
--- TODO: Add more keybindings once the debugging actually works the way I want it to work
-mk.nmap("<leader>Db", ":DapToggleBreakpoint<CR>", "Toggle a breakpoint on the current line")
-mk.nmap("<leader>Dc", ":DapContinue<CR>", "Continue the current debugging session or start a new one")
-mk.nmap("<leader>Dt", ":DapTerminate<CR>", "Terminate the current debugging session")
+mk.nmap("<leader>dbt", ":DapToggleBreakpoint<CR>", "Toggle a breakpoint on the current line")
+mk.nmap("<leader>dbc", ":DapClearBreakpoints<CR>", "Clear all breakpoints")
+mk.nmap("<leader>dc", ":DapContinue<CR>", "Continue the current debugging session or start a new one")
+mk.nmap("<leader>dt", ":DapTerminate<CR>", "Terminate the current debugging session")
+mk.nmap("<leader>dsi", ":DapStepInto<CR>", "Step into the function")
+mk.nmap("<leader>dsu", ":DapStepOut<CR>", "Step out of the function")
+mk.nmap("<leader>dso", ":DapStepOver<CR>", "Step over the function")
 
 -- -- rest.nvim
 -- mk.nmap("<leader>rr", ":Rest run<CR>", "Run request under the cursor")
 -- mk.nmap("<leader>rl", ":Rest last<CR>", "Re-run latest request")
+
+-- Spectre
+local spectre = require("spectre")
+mk.nmap("<leader>S", spectre.toggle, "Toggle Spectre")
+mk.nmap("<leader>Sw", function()
+    spectre.open_visual({ select_word = true })
+end, "Search current word")
+mk.vmap("<leader>Sw", spectre.open_visual, "Search current word")
+mk.nmap("<leader>Sp", function()
+    spectre.open_file_search({ select_word = true })
+end, "Search on current file")
 
 -- Telescope
 local builtin = require("telescope.builtin")
@@ -46,9 +60,9 @@ mk.nmap("<leader>ff", builtin.find_files, "Find files by name using Telescope")
 mk.nmap("<leader>hff", function()
     builtin.find_files({ hidden = true, no_ignore = true, no_ignore_parent = true })
 end, "Find files by name including hidden and ignored files using Telescope")
-mk.nmap("<leader>fg", builtin.live_grep, "Live ripgrep prompt with Telescope")
+mk.nmap("<leader>fg", extensions.live_grep_args.live_grep_args, "Live ripgrep prompt with Telescope")
 mk.nmap("<leader>hfg", function()
-    builtin.live_grep({ additional_args = { "--hidden", "--no-ignore", "--no-ignore-parent" } })
+    extensions.live_grep_args.live_grep_args({ additional_args = { "--hidden", "--no-ignore", "--no-ignore-parent" } })
 end, "Live ripgrep prompt including hidden and ignored files using Telescope")
 mk.nmap("<leader>fb", builtin.buffers, "Find buffers by file name using Telescope")
 mk.nmap("<leader>fab", extensions.scope.buffers, "Find buffers by file name across all tabs using Telescope")

@@ -1,2 +1,2 @@
 path = "/dev"
-project_path_relative = "./*-webapp"
+project_path = "./*-webapp"

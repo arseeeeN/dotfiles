@@ -4,3 +4,4 @@
 **/.settings
 **/.tool-versions
 /home/arseen/go/
+**/.mise.toml

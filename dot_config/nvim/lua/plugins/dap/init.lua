@@ -31,8 +31,7 @@ return {
                     port = "8787",
                 },
             }
-            require("plugins.dap.codelldb")
-                .setup_adapters(dap)
+            dap.adapters.codelldb = require("plugins.dap.codelldb").adapter
         end,
     },
     {

@@ -29,6 +29,8 @@ local mason_packages = require("utils.mason").mason_packages
 vim.fn.setenv("JAVA_HOME", JAVA_21)
 
 return {
+    -- We are starting it manually, not via mason
+    mason = false,
     cmd = {
         -- os.getenv("HOME") .. "/.local/share/mise/installs/java/20/bin/java",
         -- "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -62,6 +64,15 @@ return {
             mason_packages,
             "jdtls",
             get_config_name(),
+        }, "/"),
+        "--jvm-arg=-javaagent:" ..
+        table.concat({
+            os.getenv('HOME'),
+            ".local",
+            "share",
+            "nvim",
+            "external_dependencies",
+            "lombok.jar",
         }, "/"),
         -- TODO: I don't quite know what the data directory is for and how to set it correctly with my current setup
         -- I saw a config that created a .workspaces folder in the home dir and createa a subdir for each project, I might do that
@@ -102,12 +113,11 @@ return {
                         path = JAVA_11
                         -- path = "/usr/lib/jvm/java-11-openjdk/",
                     },
-                    -- At the time of writing this comment, jdtls doesn't support Java 20 and 21 yet.
-                    -- {
-                    --     name = "JavaSE-21",
-                    --     path = JAVA_21
-                    --     -- path = "/usr/lib/jvm/java-21-openjdk/",
-                    -- },
+                    {
+                        name = "JavaSE-21",
+                        path = JAVA_21
+                        -- path = "/usr/lib/jvm/java-21-openjdk/",
+                    },
                 },
             },
         },

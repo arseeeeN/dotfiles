@@ -17,10 +17,7 @@ else
     liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
 end
 
+local cfg = require('rustaceanvim.config')
 return {
-    setup_adapters = function(dap)
-        dap.adapters.rt_lldb = require('rust-tools.dap')
-            .get_codelldb_adapter(codelldb_path, liblldb_path)
-        -- TODO: Maybe add my own rust adapter + config here? The above doesn't work too well.
-    end,
+    adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
 }

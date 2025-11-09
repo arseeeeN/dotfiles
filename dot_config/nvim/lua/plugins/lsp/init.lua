@@ -10,17 +10,15 @@ return {
             -- Mason
             -- Portable package manager for Neovim that runs everywhere Neovim runs.
             -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
-            { "williamboman/mason.nvim" },
-            { "williamboman/mason-lspconfig.nvim" }, -- Autocomplete
+            { "mason-org/mason.nvim" },
+            { "mason-org/mason-lspconfig.nvim" }, -- Autocomplete
             -- A completion plugin for neovim coded in Lua.
             {
                 "hrsh7th/nvim-cmp",
                 dependencies = {
-                    "L3MON4D3/LuaSnip",
                     "hrsh7th/cmp-nvim-lsp",
                     "hrsh7th/cmp-path",
                     "hrsh7th/cmp-buffer",
-                    "saadparwaiz1/cmp_luasnip",
                 },
             },
         },
@@ -41,25 +39,17 @@ return {
                 dockerls = {},
                 bashls = {},
                 gopls = {},
-                -- pyright = {},
-                -- vimls = {},
                 jdtls = require("plugins.lsp.jdtls"),
-                -- yamlls = {},
-                tsserver = {},
                 lua_ls = require("plugins.lsp.lua_ls"),
                 svelte = {},
                 tailwindcss = {},
+                rust_analyzer = {},
                 kotlin_language_server = {},
             },
             -- you can do any additional lsp server setup here
             -- return true if you don"t want this server to be setup with lspconfig
             ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
             setup = {
-                -- example to setup with typescript.nvim
-                tsserver = function(_, opts)
-                    require("typescript").setup({ server = opts })
-                    return true
-                end,
                 lua_ls = function(_, opts)
                     local library = opts.settings.Lua.workspace.library
                     table.insert(library, require("neodev.config").types())
@@ -75,9 +65,12 @@ return {
                     return true
                 end,
                 kotlin_language_server = function(_, opts)
-                    opts.root_dir = require("lspconfig").util.root_pattern('.git')
+                    opts.root_dir = require("lspconfig").util.root_pattern(".git")
                     return false
                 end,
+                rust_analyzer = function()
+                    return true
+                end
                 -- groovyls = function(_, opts)
                 --     opts.cmd = { table.concat({
                 --         require("utils.mason").mason_packages,
@@ -102,6 +95,7 @@ return {
                     capabilities = vim.deepcopy(capabilities),
                 }, servers[server] or {})
 
+                vim.lsp.config[server] = server_opts
                 if opts.setup[server] then
                     if opts.setup[server](server, server_opts) then
                         return
@@ -111,7 +105,7 @@ return {
                         return
                     end
                 end
-                require("lspconfig")[server].setup(server_opts)
+                vim.lsp.enable(server)
             end
 
             require("mason").setup()
@@ -134,19 +128,10 @@ return {
                 ensure_installed = ensure_installed,
                 automatic_installation = true,
             })
-            require("mason-lspconfig").setup_handlers({ setup })
-
-            -- luasnip setup
-            local luasnip = require("luasnip")
 
             -- nvim-cmp setup
             local cmp = require("cmp")
             cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        luasnip.lsp_expand(args.body)
-                    end,
-                },
                 mapping = cmp.mapping.preset.insert({
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -158,8 +143,6 @@ return {
                     ["<Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
                         else
                             fallback()
                         end
@@ -167,8 +150,6 @@ return {
                     ["<S-Tab>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
                         else
                             fallback()
                         end
@@ -177,9 +158,6 @@ return {
                 sources = {
                     {
                         name = "nvim_lsp",
-                    },
-                    {
-                        name = "luasnip",
                     },
                     {
                         name = "path",
@@ -204,60 +182,108 @@ return {
     },
     -- Use Neovim as a language server to inject LSP diagnostics,
     -- code actions, and more via Lua.
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        dependencies = { "williamboman/mason.nvim", "nvim-lua/plenary.nvim" },
-        lazy = false,
-        config = function()
-            local null_ls = require("null-ls")
-            -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-            local formatting = null_ls.builtins.formatting
-            -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-            local diagnostics = null_ls.builtins.diagnostics
+    -- {
+    --     "nvimtools/none-ls.nvim",
+    --     dependencies = { "mason-org/mason.nvim", "nvim-lua/plenary.nvim" },
+    --     lazy = false,
+    --     config = function()
+    --         local null_ls = require("null-ls")
+    --         local formatting = null_ls.builtins.formatting
+    --         local diagnostics = null_ls.builtins.diagnostics
 
-            null_ls.setup({
-                debug = false,
-                sources = {
-                    formatting.prettier.with({
-                        disabled_filetypes = { "yaml" },
-                        extra_filetypes = { "toml" },
-                        extra_args = {
-                            "--tab-width",
-                            "4",
-                            "--indent_size",
-                            "4",
-                        },
-                    }),
-                    formatting.black.with({
-                        extra_args = { "--fast" },
-                    }),
-                    formatting.stylua,
-                    formatting.google_java_format,
-                    diagnostics.flake8,
-                },
-            })
+    --         null_ls.setup({
+    --             debug = false,
+    --             sources = {
+    --                 formatting.prettier.with({
+    --                     disabled_filetypes = { "yaml" },
+    --                     extra_filetypes = { "toml" },
+    --                     extra_args = {
+    --                         "--tab-width",
+    --                         "4",
+    --                         "--indent_size",
+    --                         "4",
+    --                     },
+    --                 }),
+    --                 formatting.black.with({
+    --                     extra_args = { "--fast" },
+    --                 }),
+    --                 formatting.stylua,
+    --                 formatting.google_java_format,
+    --                 diagnostics.flake8,
+    --             },
+    --         })
+    --     end,
+    -- },
+    -- {
+    --     "pmizio/typescript-tools.nvim",
+    --     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    --     opts = {},
+    -- },
+    {
+        "stevearc/conform.nvim",
+        event = { "BufWritePre" },
+        cmd = { "ConformInfo" },
+        opts = {
+            -- Define your formatters
+            formatters_by_ft = {
+                lua = { "stylua" },
+                python = { "isort", "black" },
+                javascript = { "prettierd", "prettier", stop_after_first = true },
+                javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+                typescript = { "prettierd", "prettier", stop_after_first = true },
+                typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+            },
+            -- Set default options
+            default_format_opts = {
+                lsp_format = "fallback",
+            },
+            -- Set up format-on-save
+            format_on_save = { timeout_ms = 500 },
+        },
+        init = function()
+            -- If you want the formatexpr, here is the place to set it
+            vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         end,
     },
-    { "jose-elias-alvarez/typescript.nvim" },
     {
-        "simrat39/rust-tools.nvim",
-        config = function()
-            local rust_tools = require("rust-tools")
-            rust_tools.setup({
+        "mrcjkb/rustaceanvim",
+        version = "^6",
+        lazy = false,
+        init = function()
+            vim.g.rustaceanvim = {
                 server = {
-                    on_attach = function(_, bufnr)
-                        -- Hover actions
-                        vim.keymap.set("n", "<C-space>", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
-                        -- Code action groups
-                        vim.keymap.set(
-                            "n",
-                            "<Leader>a",
-                            rust_tools.code_action_group.code_action_group,
-                            { buffer = bufnr }
-                        )
+                    cmd = function()
+                        local mason_registry = require("mason-registry")
+                        if mason_registry.is_installed('rust-analyzer') then
+                            -- This may need to be tweaked depending on the operating system.
+                            local ra = mason_registry.get_package('rust-analyzer')
+                            local ra_filename = ra:get_receipt():get().links.bin['rust-analyzer']
+                            return { ('%s/%s/%s'):format('rust_analyze', require("utils.mason").mason_packages,
+                                ra_filename or 'rust-analyzer') }
+                        else
+                            -- global installation
+                            return { 'rust-analyzer' }
+                        end
+                        -- local ra_binary = mason_registry.is_installed("rust-analyzer")
+                        --     -- This may need to be tweaked, depending on the operating system.
+                        --     and mason_registry.get_package("rust-analyzer"):get_install_path() ..
+                        --     "/rust-analyzer-aarch64-apple-darwin"
+                        --     or "rust-analyzer"
+                        -- return { ra_binary } -- You can add args to the list, such as "--log-file"
                     end,
                 },
-            })
+                tools = {},
+                dap = {
+                    adapter = require("plugins.dap.codelldb").adapter
+                },
+            }
+        end
+    },
+    {
+        "saecki/crates.nvim",
+        event = { "BufRead Cargo.toml" },
+        config = function()
+            require("crates").setup()
         end,
     },
     { "mfussenegger/nvim-jdtls" },
